@@ -18,9 +18,6 @@ A SwiftUI App That Displays A Timetable In A List.
 - Drag And Drop Support (iOS And macOS)
 - Copy Task Information (iOS And macOS)
  
-## Images
-[Click Here...]()
-
 ## Releases
 [Click Here...](https://github.com/markydoodled/Timetable/releases)
 

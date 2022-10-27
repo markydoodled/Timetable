@@ -19,11 +19,10 @@ A SwiftUI App That Displays A Timetable In A List.
 - Copy Task Information (iOS And macOS)
  
 ## Images
-
-
+[Click Here...]()
 
 ## Releases
-
+[Click Here...](https://github.com/markydoodled/Timetable/releases)
 
 ## Notes
  Works On iOS 16, watchOS 9 And macOS 12.3 And Above

@@ -1,5 +1,5 @@
 # Timetable
-A SwiftUI App That Displays A Timetable In A List.
+A SwiftUI App That Displays A Timetable Events In A List.
 
 ## Supported Platforms
 - iOS 16.0+

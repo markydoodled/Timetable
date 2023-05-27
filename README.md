@@ -2,9 +2,9 @@
 A SwiftUI App That Displays A Timetable In A List.
 
 ## Supported Platforms
-- iOS
-- watchOS
-- macOS
+- iOS 16.0+
+- watchOS 9.0+
+- macOS 12.3+
 
 ## Features
 - Widget Support (iOS And macOS)
@@ -20,6 +20,3 @@ A SwiftUI App That Displays A Timetable In A List.
  
 ## Releases
 [Click Here...](https://github.com/markydoodled/Timetable/releases)
-
-## Notes
- Works On iOS 16, watchOS 9 And macOS 12.3 And Above

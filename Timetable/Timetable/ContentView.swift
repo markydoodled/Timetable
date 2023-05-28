@@ -19,6 +19,7 @@ struct ContentView: View {
     @State var selectedDay = 1
     @State var selectedTime = Date()
     @State var selectedTimeDetail = ""
+    @State var selectedDayDetail = ""
     @State var day = 1
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Monday.entity(),
@@ -42,7 +43,7 @@ struct ContentView: View {
             animation: .default)
     private var items5: FetchedResults<Friday>
     var body: some View {
-        NavigationView {
+        NavigationSplitView {
             List {
                 Section(header: Label("Monday", systemImage: "1.circle")) {
                     ForEach(items) { item in
@@ -250,18 +251,14 @@ struct ContentView: View {
                         }
                 }
             }
-            .listStyle(InsetListStyle())
+            .listStyle(.sidebar)
+        } detail: {
             Image("AppsIcon")
                 .resizable()
                 .cornerRadius(25)
                 .frame(width: 150, height: 150)
                 .navigationTitle("Timetable")
                 .toolbar {
-                    ToolbarItem(placement: .navigation) {
-                        Button(action: {NSApp.sendAction(#selector(NSSplitViewController.toggleSidebar(_:)), to: nil, from: nil)}) {
-                            Image(systemName: "sidebar.left")
-                        }
-                    }
                     ToolbarItem(placement: .confirmationAction) {
                         Button(action: {self.showingAdd = true}) {
                             Image(systemName: "plus")
@@ -282,6 +279,7 @@ struct ContentView: View {
                 TextField("Title", text: $titleText)
                 TextField("Location", text: $locationText)
             }
+            .padding(.vertical)
             Section {
                 Picker("Day", selection: $selectedDay) {
                     Text("Monday")
@@ -298,93 +296,98 @@ struct ContentView: View {
                 DatePicker("Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.compact)
             }
+            .padding(.bottom)
             Section {
                 TextField("Notes", text: $notesText)
                     .lineLimit(5)
             }
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.titleText = ""
-                    self.locationText = ""
-                    self.notesText = ""
-                    self.selectedDay = 1
-                    self.selectedTime = Date()
-                    self.showingAdd = false}) {
-                        Text("Cancel")
+            .padding(.bottom)
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.titleText = ""
+                        self.locationText = ""
+                        self.notesText = ""
+                        self.selectedDay = 1
+                        self.selectedTime = Date()
+                        self.showingAdd = false}) {
+                            Text("Cancel")
+                        }
+                        .buttonStyle(.bordered)
+                    Button(action: {
+                        if selectedDay == 1 {
+                            let data = Monday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else if selectedDay == 2 {
+                            let data = Tuesday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else if selectedDay == 3 {
+                            let data = Wednesday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else if selectedDay == 4 {
+                            let data = Thursday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else if selectedDay == 5 {
+                            let data = Friday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else {
+                            print("Error Day Range")
+                        }
+                        self.titleText = ""
+                        self.locationText = ""
+                        self.notesText = ""
+                        self.selectedDay = 1
+                        self.selectedTime = Date()
+                        self.showingAdd = false
+                    }) {
+                        Text("Done")
                     }
-                    .buttonStyle(.bordered)
-                Button(action: {
-                    if selectedDay == 1 {
-                        let data = Monday(context: managedObjectContext)
-                        data.title = titleText
-                        data.location = locationText
-                        data.notes = notesText
-                        let selectTime = selectedTime
-                        let formatter = DateFormatter()
-                        formatter.timeStyle = .short
-                        data.dueTime = formatter.string(from: selectTime)
-                        data.day = Int64(selectedDay)
-                        PersistenceController.shared.save()
-                    } else if selectedDay == 2 {
-                        let data = Tuesday(context: managedObjectContext)
-                        data.title = titleText
-                        data.location = locationText
-                        data.notes = notesText
-                        let selectTime = selectedTime
-                        let formatter = DateFormatter()
-                        formatter.timeStyle = .short
-                        data.dueTime = formatter.string(from: selectTime)
-                        data.day = Int64(selectedDay)
-                        PersistenceController.shared.save()
-                    } else if selectedDay == 3 {
-                        let data = Wednesday(context: managedObjectContext)
-                        data.title = titleText
-                        data.location = locationText
-                        data.notes = notesText
-                        let selectTime = selectedTime
-                        let formatter = DateFormatter()
-                        formatter.timeStyle = .short
-                        data.dueTime = formatter.string(from: selectTime)
-                        data.day = Int64(selectedDay)
-                        PersistenceController.shared.save()
-                    } else if selectedDay == 4 {
-                        let data = Thursday(context: managedObjectContext)
-                        data.title = titleText
-                        data.location = locationText
-                        data.notes = notesText
-                        let selectTime = selectedTime
-                        let formatter = DateFormatter()
-                        formatter.timeStyle = .short
-                        data.dueTime = formatter.string(from: selectTime)
-                        data.day = Int64(selectedDay)
-                        PersistenceController.shared.save()
-                    } else if selectedDay == 5 {
-                        let data = Friday(context: managedObjectContext)
-                        data.title = titleText
-                        data.location = locationText
-                        data.notes = notesText
-                        let selectTime = selectedTime
-                        let formatter = DateFormatter()
-                        formatter.timeStyle = .short
-                        data.dueTime = formatter.string(from: selectTime)
-                        data.day = Int64(selectedDay)
-                        PersistenceController.shared.save()
-                    } else {
-                        print("Error Day Range")
-                    }
-                    self.titleText = ""
-                    self.locationText = ""
-                    self.notesText = ""
-                    self.selectedDay = 1
-                    self.selectedTime = Date()
-                    self.showingAdd = false
-                }) {
-                    Text("Done")
+                    .buttonStyle(.borderedProminent)
+                    Spacer()
                 }
-                .buttonStyle(.borderedProminent)
-                Spacer()
             }
+            .padding(.bottom)
         }
     }
     var detail: some View {
@@ -452,18 +455,25 @@ struct ContentView: View {
             }
             .padding(.horizontal)
         }
+        .onAppear() {
+            if selectedDay == 1 {
+                selectedDayDetail = "Monday"
+            } else if selectedDay == 2 {
+                selectedDayDetail = "Tuesday"
+            } else if selectedDay == 3 {
+                selectedDayDetail = "Wednesday"
+            } else if selectedDay == 4 {
+                selectedDayDetail = "Thursday"
+            } else if selectedDay == 5 {
+                selectedDayDetail = "Friday"
+            } else {
+                selectedDayDetail = "Day Error"
+            }
+        }
         .navigationTitle("\(titleText)")
         .toolbar {
-            ToolbarItem(placement: .navigation) {
-                Button(action: {NSApp.sendAction(#selector(NSSplitViewController.toggleSidebar(_:)), to: nil, from: nil)}) {
-                    Image(systemName: "sidebar.left")
-                }
-            }
             ToolbarItem(placement: .confirmationAction) {
-                Button(action: {self.showingShare = true}) {
-                    Image(systemName: "square.and.arrow.up")
-                }
-                .background(SharingsPicker(isPresented: $showingShare, sharingItems: ["\(titleText)\n\(selectedTimeDetail)\n\(locationText)"]))
+                ShareLink(item: "\(titleText)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationText)\n\(notesText)")
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: {self.showingAdd = true}) {
@@ -483,43 +493,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-struct SharingsPicker: NSViewRepresentable {
-    @Binding var isPresented: Bool
-    var sharingItems: [Any] = []
-
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView()
-        return view
-    }
-
-    func updateNSView(_ nsView: NSView, context: Context) {
-        if isPresented {
-            let picker = NSSharingServicePicker(items: sharingItems)
-            picker.delegate = context.coordinator
-
-            DispatchQueue.main.async {
-                picker.show(relativeTo: .zero, of: nsView, preferredEdge: .minY)
-            }
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(owner: self)
-    }
-
-    class Coordinator: NSObject, NSSharingServicePickerDelegate {
-        let owner: SharingsPicker
-
-        init(owner: SharingsPicker) {
-            self.owner = owner
-        }
-
-        func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, didChoose service: NSSharingService?) {
-            sharingServicePicker.delegate = nil
-            self.owner.isPresented = false
-        }
     }
 }

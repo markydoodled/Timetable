@@ -157,19 +157,19 @@ struct Timetable_Widget_iOSEntryView : View {
         case .accessoryInline:
             ZStack {
                 if day == 1 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "1.circle")
                 } else if day == 2 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "2.circle")
                 } else if day == 3 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "3.circle")
                 } else if day == 4 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "4.circle")
                 } else if day == 5 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "5.circle")
                 } else if day == 6 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "6.circle")
                 } else if day == 7 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "7.circle")
                 } else {
                     Text("Error Day Select")
                 }
@@ -202,37 +202,37 @@ struct Timetable_Widget_iOSEntryView : View {
             HStack {
             VStack(alignment: .leading) {
                 if day == 1 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "1.circle")
                         .bold()
                     Text("Today Is")
                     Text("Monday")
                 } else if day == 2 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "2.circle")
                         .bold()
                     Text("Today Is")
                     Text("Tuesday")
                 } else if day == 3 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "3.circle")
                         .bold()
                     Text("Today Is")
                     Text("Wednesday")
                 } else if day == 4 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "4.circle")
                         .bold()
                     Text("Today Is")
                     Text("Thursday")
                 } else if day == 5 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "5.circle")
                         .bold()
                     Text("Today Is")
                     Text("Friday")
                 } else if day == 6 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "6.circle")
                         .bold()
                     Text("Today Is")
                     Text("Saturday")
                 } else if day == 7 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "7.circle")
                         .bold()
                     Text("Today Is")
                     Text("Sunday")

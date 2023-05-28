@@ -33,6 +33,14 @@ struct SettingsView: View {
                   sortDescriptors: [],
             animation: .default)
     private var items5: FetchedResults<Friday>
+    @FetchRequest(entity: Saturday.entity(),
+                  sortDescriptors: [],
+            animation: .default)
+    private var items6: FetchedResults<Saturday>
+    @FetchRequest(entity: Sunday.entity(),
+                  sortDescriptors: [],
+            animation: .default)
+    private var items7: FetchedResults<Sunday>
     var body: some View {
         Form {
             GroupBox(label: Label("Notifications", systemImage: "calendar")) {
@@ -62,8 +70,12 @@ struct SettingsView: View {
                             day = 4
                         } else if dateOut == "Friday" {
                             day = 5
-                        } else {
+                        } else if dateOut == "Saturday" {
                             day = 6
+                        } else if dateOut == "Sunday" {
+                            day = 7
+                        } else {
+                            day = 8
                         }
                         let content = UNMutableNotificationContent()
                         content.title = "Happening First Today"
@@ -77,6 +89,10 @@ struct SettingsView: View {
                             content.subtitle = "Thursday - \(items4.first?.title ?? "None")"
                         } else if selectedDay == 5 {
                             content.subtitle = "Friday - \(items5.first?.title ?? "None")"
+                        } else if selectedDay == 6 {
+                            content.subtitle = "Saturday - \(items6.first?.title ?? "None")"
+                        } else if selectedDay == 7 {
+                            content.subtitle = "Sunday - \(items7.first?.title ?? "None")"
                         } else {
                             content.subtitle = "Not A Weekday Today"
                         }

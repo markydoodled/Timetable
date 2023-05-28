@@ -295,6 +295,7 @@ struct ContentView: View {
                         .sheet(isPresented: $showingAdd) {
                             add
                                 .presentationDetents([.medium, .large])
+                                .presentationDragIndicator(.visible)
                         }
                     }
                 }
@@ -567,6 +568,11 @@ struct ContentView: View {
         }
             .navigationTitle("\(titleText)")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ShareLink(item: "\(titleText)\n\(selectedTimeDetail)\n\(locationText)\n\(notesText)")
+                }
+            }
     }
     //Add Event View
     var add: some View {
@@ -771,10 +777,10 @@ struct ContentView: View {
                 }
                 Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
                     LabeledContent("Version") {
-                        Text("1.0")
+                        Text("1.1")
                     }
                     LabeledContent("Build") {
-                        Text("1")
+                        Text("6")
                     }
                     Button(action: {self.isShowingMailView.toggle()}) {
                         Text("Send Feedback")

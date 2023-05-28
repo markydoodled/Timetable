@@ -17,7 +17,7 @@ struct TimetableApp: App {
                 .frame(minWidth: 950, maxWidth: .infinity, minHeight: 480, maxHeight: .infinity)
                 .environment(\.managedObjectContext, persistence.container.viewContext)
         }
-        .windowToolbarStyle(UnifiedWindowToolbarStyle(showsTitle: true))
+        .windowToolbarStyle(.unified(showsTitle: true))
         .onChange(of: scenePhase) { _ in
             persistence.save()
         }

@@ -209,14 +209,13 @@ struct ContentView: View {
                 }
                 Button(action: {self.showingAdd = true}) {
                     Label("Add", systemImage: "plus")
+                        .foregroundColor(.accentColor)
                 }
-                .foregroundColor(.accentColor)
                 .sheet(isPresented: $showingAdd) {
                     add
                 }
                 NavigationLink(destination: settings) {
                     Label("Settings", systemImage: "gearshape")
-                        .foregroundColor(.accentColor)
                 }
             }
             .navigationTitle("Timetable")
@@ -249,6 +248,7 @@ struct ContentView: View {
             Section(header: Label("Notes", systemImage: "note.text")) {
                 Text("\(notesText)")
             }
+            ShareLink(item: "\(titleText)\n\(locationText)\n\(notesText)")
         }
             .navigationTitle("\(titleText)")
     }
@@ -406,10 +406,10 @@ struct ContentView: View {
                 }
                 Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
                     LabeledContent("Version") {
-                        Text("1.0")
+                        Text("1.1")
                     }
                     LabeledContent("Build") {
-                        Text("1")
+                        Text("6")
                     }
                 }
             }

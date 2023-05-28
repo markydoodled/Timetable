@@ -23,7 +23,6 @@ struct ContentView: View {
     @State var selectedTime = Date()
     @State var selectedTimeDetail = ""
     @State var day = 1
-    @AppStorage("isDark") var isDark = false
     @State var result: Result<MFMailComposeResult, Error>? = nil
     @State var isShowingMailView = false
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -300,7 +299,6 @@ struct ContentView: View {
                     }
                 }
                 .toolbarRole(.navigationStack)
-                .preferredColorScheme(isDark ? .dark : .light)
             }
         } else {
             NavigationSplitView {
@@ -516,7 +514,6 @@ struct ContentView: View {
                         }
                     }
                     .toolbarRole(.navigationStack)
-                    .preferredColorScheme(isDark ? .dark : .light)
             } detail: {
                 Image("AppsIcon")
                     .resizable()
@@ -707,10 +704,6 @@ struct ContentView: View {
     var settings: some View {
         NavigationStack {
             Form {
-                Section(header: Label("Appearance", systemImage: "paintbrush.pointed")) {
-                    Toggle("Use Dark Mode", isOn: $isDark)
-                        .toggleStyle(.switch)
-                }
                 Section(header: Label("Permissions", systemImage: "lock")) {
                     Button(action: {UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                         if success {

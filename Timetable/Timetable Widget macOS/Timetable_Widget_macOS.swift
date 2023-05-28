@@ -102,12 +102,32 @@ struct Timetable_Widget_macOSEntryView : View {
                     }
                 } else if day == 6 {
                     Rectangle()
+                        .foregroundColor(.pink)
+                    VStack {
+                        Text("Today Is")
+                            .bold()
+                            .foregroundColor(.white)
+                        Text("Saturday")
+                            .bold()
+                            .foregroundColor(.white)
+                    }
+                } else if day == 7 {
+                    Rectangle()
+                        .foregroundColor(.purple)
+                    VStack {
+                        Text("Today Is")
+                            .bold()
+                            .foregroundColor(.white)
+                        Text("Sunday")
+                            .bold()
+                            .foregroundColor(.white)
+                    }
+                } else {
+                    Rectangle()
                         .foregroundColor(.gray)
-                    Text("Not A Weekday")
+                    Text("Error Day Select")
                         .bold()
                         .foregroundColor(.white)
-                } else {
-                    Text("Error Day Select")
                 }
             }
             .onAppear() {
@@ -126,8 +146,12 @@ struct Timetable_Widget_macOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         case .systemMedium:

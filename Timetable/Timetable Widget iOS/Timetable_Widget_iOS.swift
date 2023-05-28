@@ -102,12 +102,32 @@ struct Timetable_Widget_iOSEntryView : View {
                     }
                 } else if day == 6 {
                     Rectangle()
+                        .foregroundColor(.pink)
+                    VStack {
+                        Text("Today Is")
+                            .bold()
+                            .foregroundColor(.white)
+                        Text("Saturday")
+                            .bold()
+                            .foregroundColor(.white)
+                    }
+                } else if day == 7 {
+                    Rectangle()
+                        .foregroundColor(.purple)
+                    VStack {
+                        Text("Today Is")
+                            .bold()
+                            .foregroundColor(.white)
+                        Text("Sunday")
+                            .bold()
+                            .foregroundColor(.white)
+                    }
+                } else {
+                    Rectangle()
                         .foregroundColor(.gray)
-                    Text("Not A Weekday")
+                    Text("Error Day Select")
                         .bold()
                         .foregroundColor(.white)
-                } else {
-                    Text("Error Day Select")
                 }
             }
             .onAppear() {
@@ -126,8 +146,12 @@ struct Timetable_Widget_iOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         case .accessoryInline:
@@ -143,7 +167,9 @@ struct Timetable_Widget_iOSEntryView : View {
                 } else if day == 5 {
                     Label("Timetable", systemImage: "calendar")
                 } else if day == 6 {
-                    Label("Not A Weekday", systemImage: "calendar")
+                    Label("Timetable", systemImage: "calendar")
+                } else if day == 7 {
+                    Label("Timetable", systemImage: "calendar")
                 } else {
                     Text("Error Day Select")
                 }
@@ -164,8 +190,12 @@ struct Timetable_Widget_iOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         case .accessoryRectangular:
@@ -199,7 +229,13 @@ struct Timetable_Widget_iOSEntryView : View {
                 } else if day == 6 {
                     Label("Timetable", systemImage: "calendar")
                         .bold()
-                    Text("Not A Weekday")
+                    Text("Today Is")
+                    Text("Saturday")
+                } else if day == 7 {
+                    Label("Timetable", systemImage: "calendar")
+                        .bold()
+                    Text("Today Is")
+                    Text("Sunday")
                 } else {
                     Text("Error Day Select")
                 }
@@ -222,8 +258,12 @@ struct Timetable_Widget_iOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         case .systemMedium:

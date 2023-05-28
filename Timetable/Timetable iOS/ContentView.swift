@@ -46,6 +46,14 @@ struct ContentView: View {
                   sortDescriptors: [],
             animation: .default)
     private var items5: FetchedResults<Friday>
+    @FetchRequest(entity: Saturday.entity(),
+                  sortDescriptors: [],
+            animation: .default)
+    private var items6: FetchedResults<Saturday>
+    @FetchRequest(entity: Sunday.entity(),
+                  sortDescriptors: [],
+            animation: .default)
+    private var items7: FetchedResults<Sunday>
     //Home Screen View
     var body: some View {
         if horizontalSizeClass == .compact {
@@ -271,6 +279,94 @@ struct ContentView: View {
                                 PersistenceController.shared.save()
                             }
                     }
+                    Section(header: Label("Saturday", systemImage: "6.circle")) {
+                        ForEach(items6) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleText = item.title ?? "Error"
+                                self.locationText = item.location ?? "Error"
+                                self.notesText = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                            }
+                                .onDisappear() {
+                                    self.titleText = ""
+                                    self.locationText = ""
+                                    self.notesText = ""
+                                    self.selectedDay = 1
+                                    self.selectedTime = Date()
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.system(.title, design: .rounded))
+                                        .foregroundColor(.pink)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.system(.title2, design: .rounded))
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.system(.title3, design: .rounded))
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .contextMenu {
+                                ShareLink(item: "\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")")
+                            }
+                            .onDrag {
+                                return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            }
+                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items6[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
+                    Section(header: Label("Sunday", systemImage: "7.circle")) {
+                        ForEach(items7) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleText = item.title ?? "Error"
+                                self.locationText = item.location ?? "Error"
+                                self.notesText = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                            }
+                                .onDisappear() {
+                                    self.titleText = ""
+                                    self.locationText = ""
+                                    self.notesText = ""
+                                    self.selectedDay = 1
+                                    self.selectedTime = Date()
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.system(.title, design: .rounded))
+                                        .foregroundColor(.purple)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.system(.title2, design: .rounded))
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.system(.title3, design: .rounded))
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .contextMenu {
+                                ShareLink(item: "\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")")
+                            }
+                            .onDrag {
+                                return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            }
+                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items7[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
                 }
                 .navigationTitle("Timetable")
                 .toolbar {
@@ -488,6 +584,80 @@ struct ContentView: View {
                                 PersistenceController.shared.save()
                             }
                     }
+                    Section(header: Label("Saturday", systemImage: "6.circle")) {
+                        ForEach(items6) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleText = item.title ?? "Error"
+                                self.locationText = item.location ?? "Error"
+                                self.notesText = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                            }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.system(.title, design: .rounded))
+                                        .foregroundColor(.pink)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.system(.title2, design: .rounded))
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.system(.title3, design: .rounded))
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .contextMenu {
+                                ShareLink(item: "\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")")
+                            }
+                            .onDrag {
+                                return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            }
+                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items6[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
+                    Section(header: Label("Sunday", systemImage: "7.circle")) {
+                        ForEach(items7) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleText = item.title ?? "Error"
+                                self.locationText = item.location ?? "Error"
+                                self.notesText = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                            }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.system(.title, design: .rounded))
+                                        .foregroundColor(.purple)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.system(.title2, design: .rounded))
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.system(.title3, design: .rounded))
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .contextMenu {
+                                ShareLink(item: "\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")")
+                            }
+                            .onDrag {
+                                return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            }
+                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items7[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
                 }
                     .navigationTitle("Timetable")
                     .toolbar {
@@ -549,6 +719,12 @@ struct ContentView: View {
                 } else if selectedDay == 5 {
                     Text("Friday")
                         .textSelection(.enabled)
+                } else if selectedDay == 6 {
+                    Text("Saturday")
+                        .textSelection(.enabled)
+                } else if selectedDay == 7 {
+                    Text("Sunday")
+                        .textSelection(.enabled)
                 } else {
                     Text("Day Error")
                         .textSelection(.enabled)
@@ -591,6 +767,10 @@ struct ContentView: View {
                             .tag(4)
                         Text("Friday")
                             .tag(5)
+                        Text("Saturday")
+                            .tag(6)
+                        Text("Sunday")
+                            .tag(7)
                     }
                     DatePicker("Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
                         .datePickerStyle(.graphical)
@@ -671,6 +851,28 @@ struct ContentView: View {
                             data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
+                        } else if selectedDay == 6 {
+                            let data = Saturday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else if selectedDay == 7 {
+                            let data = Sunday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
                         } else {
                             print("Error Day Range")
                         }
@@ -728,8 +930,12 @@ struct ContentView: View {
                             day = 4
                         } else if dateOut == "Friday" {
                             day = 5
-                        } else {
+                        } else if dateOut == "Saturday" {
                             day = 6
+                        } else if dateOut == "Sunday" {
+                            day = 7
+                        } else {
+                            day = 8
                         }
                         let content = UNMutableNotificationContent()
                         content.title = "Happening First Today"
@@ -743,8 +949,12 @@ struct ContentView: View {
                             content.subtitle = "Thursday - \(items4.first?.title ?? "None")"
                         } else if selectedDay == 5 {
                             content.subtitle = "Friday - \(items5.first?.title ?? "None")"
+                        } else if selectedDay == 6 {
+                            content.subtitle = "Saturday - \(items6.first?.title ?? "None")"
+                        } else if selectedDay == 7 {
+                            content.subtitle = "Sunday - \(items7.first?.title ?? "None")"
                         } else {
-                            content.subtitle = "Not A Weekday Today"
+                            content.subtitle = "Unrecognised Day"
                         }
                         content.sound = UNNotificationSound.default
                         var date = DateComponents()

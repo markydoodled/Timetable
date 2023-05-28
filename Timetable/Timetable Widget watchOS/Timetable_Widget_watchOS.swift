@@ -79,7 +79,15 @@ struct Timetable_Widget_watchOSEntryView : View {
                         .foregroundColor(.blue)
                     Text("Tasks")
                 } else if day == 6 {
-                    Text("Not A Weekday")
+                    Text("Sat")
+                        .bold()
+                        .foregroundColor(.pink)
+                    Text("Tasks")
+                } else if day == 7 {
+                    Text("Sun")
+                        .bold()
+                        .foregroundColor(.purple)
+                    Text("Tasks")
                 } else {
                     Text("Error Day Select")
                 }
@@ -100,8 +108,12 @@ struct Timetable_Widget_watchOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         case .accessoryCircular:
@@ -132,7 +144,15 @@ struct Timetable_Widget_watchOSEntryView : View {
                     .foregroundColor(.blue)
                 Text("Tasks")
             } else if day == 6 {
-                Text("Not A Weekday")
+                Text("Sat")
+                    .bold()
+                    .foregroundColor(.pink)
+                Text("Tasks")
+            } else if day == 7 {
+                Text("Sun")
+                    .bold()
+                    .foregroundColor(.purple)
+                Text("Tasks")
             } else {
                 Text("Error Day Select")
             }
@@ -153,8 +173,12 @@ struct Timetable_Widget_watchOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         case .accessoryRectangular:
@@ -193,7 +217,15 @@ struct Timetable_Widget_watchOSEntryView : View {
                 } else if day == 6 {
                     Label("Timetable", systemImage: "calendar")
                         .bold()
-                    Text("Not A Weekday")
+                        .foregroundColor(.pink)
+                    Text("Today Is")
+                    Text("Saturday")
+                } else if day == 7 {
+                    Label("Timetable", systemImage: "calendar")
+                        .bold()
+                        .foregroundColor(.purple)
+                    Text("Today Is")
+                    Text("Sunday")
                 } else {
                     Text("Error Day Select")
                 }
@@ -216,8 +248,12 @@ struct Timetable_Widget_watchOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         case .accessoryInline:
@@ -233,7 +269,9 @@ struct Timetable_Widget_watchOSEntryView : View {
                 } else if day == 5 {
                     Label("Timetable", systemImage: "calendar")
                 } else if day == 6 {
-                    Label("Not A Weekday", systemImage: "calendar")
+                    Label("Timetable", systemImage: "calendar")
+                } else if day == 7 {
+                    Label("Timetable", systemImage: "calendar")
                 } else {
                     Text("Error Day Select")
                 }
@@ -254,8 +292,12 @@ struct Timetable_Widget_watchOSEntryView : View {
                     day = 4
                 } else if dateOut == "Friday" {
                     day = 5
-                } else {
+                } else if dateOut == "Saturday" {
                     day = 6
+                } else if dateOut == "Sunday" {
+                    day = 7
+                } else {
+                    day = 8
                 }
             }
         @unknown default:

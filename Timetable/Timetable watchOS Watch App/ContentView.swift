@@ -31,6 +31,14 @@ struct ContentView: View {
                   sortDescriptors: [],
             animation: .default)
     private var items5: FetchedResults<Friday>
+    @FetchRequest(entity: Saturday.entity(),
+                  sortDescriptors: [],
+            animation: .default)
+    private var items6: FetchedResults<Saturday>
+    @FetchRequest(entity: Sunday.entity(),
+                  sortDescriptors: [],
+            animation: .default)
+    private var items7: FetchedResults<Sunday>
     @State var showingNotificationAlert = false
     @State var addDisabled = true
     @State var titleText = ""
@@ -207,6 +215,72 @@ struct ContentView: View {
                             PersistenceController.shared.save()
                         }
                 }
+                Section(header: Label("Saturday", systemImage: "6.circle")) {
+                    ForEach(items6) { item in
+                        NavigationLink(destination: detail.onAppear() {
+                            self.titleText = item.title ?? "Error"
+                            self.locationText = item.location ?? "Error"
+                            self.notesText = item.notes ?? "Error"
+                            self.selectedDay = Int(item.day)
+                        }
+                            .onDisappear() {
+                                self.titleText = ""
+                                self.locationText = ""
+                                self.notesText = ""
+                                self.selectedDay = 1
+                            }) {
+                            VStack(alignment: .leading) {
+                                Text(item.title ?? "Error")
+                                    .bold()
+                                    .font(.system(.title2, design: .rounded))
+                                    .foregroundColor(.pink)
+                                if item.location != "" {
+                                    Text(item.location ?? "Error")
+                                        .font(.system(.title3, design: .rounded))
+                                }
+                            }
+                        }
+                    }
+                    .onDelete { indexSet in
+                            for index in indexSet {
+                                managedObjectContext.delete(items6[index])
+                            }
+                            PersistenceController.shared.save()
+                        }
+                }
+                Section(header: Label("Sunday", systemImage: "7.circle")) {
+                    ForEach(items7) { item in
+                        NavigationLink(destination: detail.onAppear() {
+                            self.titleText = item.title ?? "Error"
+                            self.locationText = item.location ?? "Error"
+                            self.notesText = item.notes ?? "Error"
+                            self.selectedDay = Int(item.day)
+                        }
+                            .onDisappear() {
+                                self.titleText = ""
+                                self.locationText = ""
+                                self.notesText = ""
+                                self.selectedDay = 1
+                            }) {
+                            VStack(alignment: .leading) {
+                                Text(item.title ?? "Error")
+                                    .bold()
+                                    .font(.system(.title2, design: .rounded))
+                                    .foregroundColor(.purple)
+                                if item.location != "" {
+                                    Text(item.location ?? "Error")
+                                        .font(.system(.title3, design: .rounded))
+                                }
+                            }
+                        }
+                    }
+                    .onDelete { indexSet in
+                            for index in indexSet {
+                                managedObjectContext.delete(items7[index])
+                            }
+                            PersistenceController.shared.save()
+                        }
+                }
                 Button(action: {self.showingAdd = true}) {
                     Label("Add", systemImage: "plus")
                         .foregroundColor(.accentColor)
@@ -241,6 +315,10 @@ struct ContentView: View {
                     Text("Thursday")
                 } else if selectedDay == 5 {
                     Text("Friday")
+                } else if selectedDay == 6 {
+                    Text("Saturday")
+                } else if selectedDay == 7 {
+                    Text("Sunday")
                 } else {
                     Text("Day Error")
                 }
@@ -272,6 +350,10 @@ struct ContentView: View {
                             .tag(4)
                         Text("Friday")
                             .tag(5)
+                        Text("Saturday")
+                            .tag(6)
+                        Text("Sunday")
+                            .tag(7)
                     }
                 }
                 Section {
@@ -323,6 +405,20 @@ struct ContentView: View {
                             PersistenceController.shared.save()
                         } else if selectedDay == 5 {
                             let data = Friday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else if selectedDay == 6 {
+                            let data = Saturday(context: managedObjectContext)
+                            data.title = titleText
+                            data.location = locationText
+                            data.notes = notesText
+                            data.day = Int64(selectedDay)
+                            PersistenceController.shared.save()
+                        } else if selectedDay == 7 {
+                            let data = Sunday(context: managedObjectContext)
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
@@ -382,6 +478,10 @@ struct ContentView: View {
                             content.subtitle = "Thursday - \(items4.first?.title ?? "None")"
                         } else if selectedDay == 5 {
                             content.subtitle = "Friday - \(items5.first?.title ?? "None")"
+                        } else if selectedDay == 6 {
+                            content.subtitle = "Saturday - \(items6.first?.title ?? "None")"
+                        } else if selectedDay == 7 {
+                            content.subtitle = "Sunday - \(items7.first?.title ?? "None")"
                         } else {
                             content.subtitle = "Not A Weekday Today"
                         }

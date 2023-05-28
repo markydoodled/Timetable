@@ -13,7 +13,6 @@ A SwiftUI App That Displays A Timetable Events In A List.
 - Daily Morning Up-Next Notifications (iOS, macOS And watchOS)
 - Feedback Button (iOS And macOS)
 - Shareable Tasks (iOS And macOS)
-- Dark Mode/Light Mode Appearance Selector (iOS)
 - Open Settings App Shortcut (iOS)
 - Drag And Drop Support (iOS And macOS)
 - Copy Task Information (iOS And macOS)

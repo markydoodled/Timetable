@@ -91,7 +91,7 @@ struct Timetable_Widget_macOSEntryView : View {
                     }
                 } else if day == 5 {
                     Rectangle()
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cyan)
                     VStack {
                         Text("Today Is")
                             .bold()

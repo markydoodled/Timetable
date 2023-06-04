@@ -76,7 +76,7 @@ struct Timetable_Widget_watchOSEntryView : View {
                 } else if day == 5 {
                     Text("Fri")
                         .bold()
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cyan)
                     Text("Tasks")
                 } else if day == 6 {
                     Text("Sat")
@@ -141,7 +141,7 @@ struct Timetable_Widget_watchOSEntryView : View {
             } else if day == 5 {
                 Text("Fri")
                     .bold()
-                    .foregroundColor(.blue)
+                    .foregroundColor(.cyan)
                 Text("Tasks")
             } else if day == 6 {
                 Text("Sat")
@@ -211,7 +211,7 @@ struct Timetable_Widget_watchOSEntryView : View {
                 } else if day == 5 {
                     Label("Timetable", systemImage: "5.circle")
                         .bold()
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cyan)
                     Text("Today Is")
                     Text("Friday")
                 } else if day == 6 {
@@ -272,7 +272,7 @@ struct Timetable_Widget_watchOSEntryView : View {
                         .foregroundColor(.green)
                 } else if day == 5 {
                     Label("Timetable", systemImage: "calendar")
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cyan)
                 } else if day == 6 {
                     Label("Timetable", systemImage: "calendar")
                         .foregroundColor(.pink)

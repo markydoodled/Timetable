@@ -76,7 +76,7 @@ struct Timetable_Widget_watchOSEntryView : View {
                 } else if day == 5 {
                     Text("Fri")
                         .bold()
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cyan)
                     Text("Tasks")
                 } else if day == 6 {
                     Text("Sat")
@@ -141,7 +141,7 @@ struct Timetable_Widget_watchOSEntryView : View {
             } else if day == 5 {
                 Text("Fri")
                     .bold()
-                    .foregroundColor(.blue)
+                    .foregroundColor(.cyan)
                 Text("Tasks")
             } else if day == 6 {
                 Text("Sat")
@@ -185,43 +185,43 @@ struct Timetable_Widget_watchOSEntryView : View {
             HStack {
             VStack(alignment: .leading) {
                 if day == 1 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "1.circle")
                         .bold()
                         .foregroundColor(.red)
                     Text("Today Is")
                     Text("Monday")
                 } else if day == 2 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "2.circle")
                         .bold()
                         .foregroundColor(.orange)
                     Text("Today Is")
                     Text("Tuesday")
                 } else if day == 3 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "3.circle")
                         .bold()
                         .foregroundColor(.yellow)
                     Text("Today Is")
                     Text("Wednesday")
                 } else if day == 4 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "4.circle")
                         .bold()
                         .foregroundColor(.green)
                     Text("Today Is")
                     Text("Thursday")
                 } else if day == 5 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "5.circle")
                         .bold()
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cyan)
                     Text("Today Is")
                     Text("Friday")
                 } else if day == 6 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "6.circle")
                         .bold()
                         .foregroundColor(.pink)
                     Text("Today Is")
                     Text("Saturday")
                 } else if day == 7 {
-                    Label("Timetable", systemImage: "calendar")
+                    Label("Timetable", systemImage: "7.circle")
                         .bold()
                         .foregroundColor(.purple)
                     Text("Today Is")
@@ -260,18 +260,25 @@ struct Timetable_Widget_watchOSEntryView : View {
             ZStack {
                 if day == 1 {
                    Label("Timetable", systemImage: "calendar")
+                        .foregroundColor(.red)
                 } else if day == 2 {
                     Label("Timetable", systemImage: "calendar")
+                        .foregroundColor(.orange)
                 } else if day == 3 {
                     Label("Timetable", systemImage: "calendar")
+                        .foregroundColor(.yellow)
                 } else if day == 4 {
                     Label("Timetable", systemImage: "calendar")
+                        .foregroundColor(.green)
                 } else if day == 5 {
                     Label("Timetable", systemImage: "calendar")
+                        .foregroundColor(.cyan)
                 } else if day == 6 {
                     Label("Timetable", systemImage: "calendar")
+                        .foregroundColor(.pink)
                 } else if day == 7 {
                     Label("Timetable", systemImage: "calendar")
+                        .foregroundColor(.purple)
                 } else {
                     Text("Error Day Select")
                 }

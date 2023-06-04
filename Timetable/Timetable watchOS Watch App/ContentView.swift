@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 import UserNotifications
+import WatchDatePicker
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -42,37 +43,48 @@ struct ContentView: View {
     @State var showingNotificationAlert = false
     @State var addDisabled = true
     @State var titleText = ""
+    @State var titleTextDetail = ""
     @State var locationText = ""
+    @State var locationTextDetail = ""
     @State var notesText = ""
+    @State var notesTextDetail = ""
     @State var selectedDay = 1
+    @State var selectedDayDetail = ""
+    @State var selectedTime = Date()
+    @State var selectedTimeDetail = ""
     @State var showingAdd = false
     //Main View
     var body: some View {
         NavigationStack {
-            Form {
+            List {
                 Section(header: Label("Monday", systemImage: "1.circle")) {
                     ForEach(items) { item in
                         NavigationLink(destination: detail.onAppear() {
-                            self.titleText = item.title ?? "Error"
-                            self.locationText = item.location ?? "Error"
-                            self.notesText = item.notes ?? "Error"
+                            self.titleTextDetail = item.title ?? "Error"
+                            self.locationTextDetail = item.location ?? "Error"
+                            self.notesTextDetail = item.notes ?? "Error"
                             self.selectedDay = Int(item.day)
+                            self.selectedTimeDetail = item.dueTime ?? "Error"
                         }
                             .onDisappear() {
-                                self.titleText = ""
-                                self.locationText = ""
-                                self.notesText = ""
+                                self.titleTextDetail = ""
+                                self.locationTextDetail = ""
+                                self.notesTextDetail = ""
                                 self.selectedDay = 1
+                                self.selectedTimeDetail = ""
                             }) {
                             VStack(alignment: .leading) {
                                 Text(item.title ?? "Error")
                                     .bold()
-                                    .font(.system(.title2, design: .rounded))
+                                    .font(.title2)
                                     .foregroundColor(.red)
                                 if item.location != "" {
                                     Text(item.location ?? "Error")
-                                        .font(.system(.title3, design: .rounded))
+                                        .font(.title3)
                                 }
+                                Text(item.dueTime ?? "Error")
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -86,26 +98,31 @@ struct ContentView: View {
                 Section(header: Label("Tuesday", systemImage: "2.circle")) {
                     ForEach(items2) { item in
                         NavigationLink(destination: detail.onAppear() {
-                            self.titleText = item.title ?? "Error"
-                            self.locationText = item.location ?? "Error"
-                            self.notesText = item.notes ?? "Error"
+                            self.titleTextDetail = item.title ?? "Error"
+                            self.locationTextDetail = item.location ?? "Error"
+                            self.notesTextDetail = item.notes ?? "Error"
                             self.selectedDay = Int(item.day)
+                            self.selectedTimeDetail = item.dueTime ?? "Error"
                         }
                             .onDisappear() {
-                                self.titleText = ""
-                                self.locationText = ""
-                                self.notesText = ""
+                                self.titleTextDetail = ""
+                                self.locationTextDetail = ""
+                                self.notesTextDetail = ""
                                 self.selectedDay = 1
+                                self.selectedTimeDetail = ""
                             }) {
                             VStack(alignment: .leading) {
                                 Text(item.title ?? "Error")
                                     .bold()
-                                    .font(.system(.title2, design: .rounded))
+                                    .font(.title2)
                                     .foregroundColor(.orange)
                                 if item.location != "" {
                                     Text(item.location ?? "Error")
-                                        .font(.system(.title3, design: .rounded))
+                                        .font(.title3)
                                 }
+                                Text(item.dueTime ?? "Error")
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -119,26 +136,31 @@ struct ContentView: View {
                 Section(header: Label("Wednesday", systemImage: "3.circle")) {
                     ForEach(items3) { item in
                         NavigationLink(destination: detail.onAppear() {
-                            self.titleText = item.title ?? "Error"
-                            self.locationText = item.location ?? "Error"
-                            self.notesText = item.notes ?? "Error"
+                            self.titleTextDetail = item.title ?? "Error"
+                            self.locationTextDetail = item.location ?? "Error"
+                            self.notesTextDetail = item.notes ?? "Error"
                             self.selectedDay = Int(item.day)
+                            self.selectedTimeDetail = item.dueTime ?? "Error"
                         }
                             .onDisappear() {
-                                self.titleText = ""
-                                self.locationText = ""
-                                self.notesText = ""
+                                self.titleTextDetail = ""
+                                self.locationTextDetail = ""
+                                self.notesTextDetail = ""
                                 self.selectedDay = 1
+                                self.selectedTimeDetail = ""
                             }) {
                             VStack(alignment: .leading) {
                                 Text(item.title ?? "Error")
                                     .bold()
-                                    .font(.system(.title2, design: .rounded))
+                                    .font(.title2)
                                     .foregroundColor(.yellow)
                                 if item.location != "" {
                                     Text(item.location ?? "Error")
-                                        .font(.system(.title3, design: .rounded))
+                                        .font(.title3)
                                 }
+                                Text(item.dueTime ?? "Error")
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -152,26 +174,31 @@ struct ContentView: View {
                 Section(header: Label("Thursday", systemImage: "4.circle")) {
                     ForEach(items4) { item in
                         NavigationLink(destination: detail.onAppear() {
-                            self.titleText = item.title ?? "Error"
-                            self.locationText = item.location ?? "Error"
-                            self.notesText = item.notes ?? "Error"
+                            self.titleTextDetail = item.title ?? "Error"
+                            self.locationTextDetail = item.location ?? "Error"
+                            self.notesTextDetail = item.notes ?? "Error"
                             self.selectedDay = Int(item.day)
+                            self.selectedTimeDetail = item.dueTime ?? "Error"
                         }
                             .onDisappear() {
-                                self.titleText = ""
-                                self.locationText = ""
-                                self.notesText = ""
+                                self.titleTextDetail = ""
+                                self.locationTextDetail = ""
+                                self.notesTextDetail = ""
                                 self.selectedDay = 1
+                                self.selectedTimeDetail = ""
                             }) {
                             VStack(alignment: .leading) {
                                 Text(item.title ?? "Error")
                                     .bold()
-                                    .font(.system(.title2, design: .rounded))
+                                    .font(.title2)
                                     .foregroundColor(.green)
                                 if item.location != "" {
                                     Text(item.location ?? "Error")
-                                        .font(.system(.title3, design: .rounded))
+                                        .font(.title3)
                                 }
+                                Text(item.dueTime ?? "Error")
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -185,26 +212,31 @@ struct ContentView: View {
                 Section(header: Label("Friday", systemImage: "5.circle")) {
                     ForEach(items5) { item in
                         NavigationLink(destination: detail.onAppear() {
-                            self.titleText = item.title ?? "Error"
-                            self.locationText = item.location ?? "Error"
-                            self.notesText = item.notes ?? "Error"
+                            self.titleTextDetail = item.title ?? "Error"
+                            self.locationTextDetail = item.location ?? "Error"
+                            self.notesTextDetail = item.notes ?? "Error"
                             self.selectedDay = Int(item.day)
+                            self.selectedTimeDetail = item.dueTime ?? "Error"
                         }
                             .onDisappear() {
-                                self.titleText = ""
-                                self.locationText = ""
-                                self.notesText = ""
+                                self.titleTextDetail = ""
+                                self.locationTextDetail = ""
+                                self.notesTextDetail = ""
                                 self.selectedDay = 1
+                                self.selectedTimeDetail = ""
                             }) {
                             VStack(alignment: .leading) {
                                 Text(item.title ?? "Error")
                                     .bold()
-                                    .font(.system(.title2, design: .rounded))
-                                    .foregroundColor(.blue)
+                                    .font(.title2)
+                                    .foregroundColor(.cyan)
                                 if item.location != "" {
                                     Text(item.location ?? "Error")
-                                        .font(.system(.title3, design: .rounded))
+                                        .font(.title3)
                                 }
+                                Text(item.dueTime ?? "Error")
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -218,26 +250,31 @@ struct ContentView: View {
                 Section(header: Label("Saturday", systemImage: "6.circle")) {
                     ForEach(items6) { item in
                         NavigationLink(destination: detail.onAppear() {
-                            self.titleText = item.title ?? "Error"
-                            self.locationText = item.location ?? "Error"
-                            self.notesText = item.notes ?? "Error"
+                            self.titleTextDetail = item.title ?? "Error"
+                            self.locationTextDetail = item.location ?? "Error"
+                            self.notesTextDetail = item.notes ?? "Error"
                             self.selectedDay = Int(item.day)
+                            self.selectedTimeDetail = item.dueTime ?? "Error"
                         }
                             .onDisappear() {
-                                self.titleText = ""
-                                self.locationText = ""
-                                self.notesText = ""
+                                self.titleTextDetail = ""
+                                self.locationTextDetail = ""
+                                self.notesTextDetail = ""
                                 self.selectedDay = 1
+                                self.selectedTimeDetail = ""
                             }) {
                             VStack(alignment: .leading) {
                                 Text(item.title ?? "Error")
                                     .bold()
-                                    .font(.system(.title2, design: .rounded))
+                                    .font(.title2)
                                     .foregroundColor(.pink)
                                 if item.location != "" {
                                     Text(item.location ?? "Error")
-                                        .font(.system(.title3, design: .rounded))
+                                        .font(.title3)
                                 }
+                                Text(item.dueTime ?? "Error")
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -251,26 +288,31 @@ struct ContentView: View {
                 Section(header: Label("Sunday", systemImage: "7.circle")) {
                     ForEach(items7) { item in
                         NavigationLink(destination: detail.onAppear() {
-                            self.titleText = item.title ?? "Error"
-                            self.locationText = item.location ?? "Error"
-                            self.notesText = item.notes ?? "Error"
+                            self.titleTextDetail = item.title ?? "Error"
+                            self.locationTextDetail = item.location ?? "Error"
+                            self.notesTextDetail = item.notes ?? "Error"
                             self.selectedDay = Int(item.day)
+                            self.selectedTimeDetail = item.dueTime ?? "Error"
                         }
                             .onDisappear() {
-                                self.titleText = ""
-                                self.locationText = ""
-                                self.notesText = ""
+                                self.titleTextDetail = ""
+                                self.locationTextDetail = ""
+                                self.notesTextDetail = ""
                                 self.selectedDay = 1
+                                self.selectedTimeDetail = ""
                             }) {
                             VStack(alignment: .leading) {
                                 Text(item.title ?? "Error")
                                     .bold()
-                                    .font(.system(.title2, design: .rounded))
+                                    .font(.title2)
                                     .foregroundColor(.purple)
                                 if item.location != "" {
                                     Text(item.location ?? "Error")
-                                        .font(.system(.title3, design: .rounded))
+                                        .font(.title3)
                                 }
+                                Text(item.dueTime ?? "Error")
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
@@ -299,10 +341,12 @@ struct ContentView: View {
     var detail: some View {
         Form {
             Section(header: Label("Title", systemImage: "textformat")) {
-                Text("\(titleText)")
+                Text("\(titleTextDetail)")
             }
-            Section(header: Label("Location", systemImage: "location.fill")) {
-                Text("\(locationText)")
+            if locationTextDetail != "" {
+                Section(header: Label("Location", systemImage: "location.fill")) {
+                    Text("\(locationTextDetail)")
+                }
             }
             Section(header: Label("Day", systemImage: "calendar")) {
                 if selectedDay == 1 {
@@ -323,12 +367,36 @@ struct ContentView: View {
                     Text("Day Error")
                 }
             }
-            Section(header: Label("Notes", systemImage: "note.text")) {
-                Text("\(notesText)")
+            Section(header: Label("Time", systemImage: "calendar.badge.clock")) {
+                Text("\(selectedTimeDetail)")
             }
-            ShareLink(item: "\(titleText)\n\(locationText)\n\(notesText)")
+            if notesTextDetail != "" {
+                Section(header: Label("Notes", systemImage: "note.text")) {
+                    Text("\(notesTextDetail)")
+                }
+            }
+            ShareLink(item: "\(titleTextDetail)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)\n\(notesTextDetail)")
         }
-            .navigationTitle("\(titleText)")
+        .onAppear() {
+            if selectedDay == 1 {
+                selectedDayDetail = "Monday"
+            } else if selectedDay == 2 {
+                selectedDayDetail = "Tuesday"
+            } else if selectedDay == 3 {
+                selectedDayDetail = "Wednesday"
+            } else if selectedDay == 4 {
+                selectedDayDetail = "Thursday"
+            } else if selectedDay == 5 {
+                selectedDayDetail = "Friday"
+            } else if selectedDay == 6 {
+                selectedDayDetail = "Saturday"
+            } else if selectedDay == 7 {
+                selectedDayDetail = "Sunday"
+            } else {
+                selectedDayDetail = "Day Error"
+            }
+        }
+            .navigationTitle("\(titleTextDetail)")
     }
     //Add View
     var add: some View {
@@ -355,6 +423,7 @@ struct ContentView: View {
                         Text("Sunday")
                             .tag(7)
                     }
+                    DatePicker("Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
                 }
                 Section {
                     TextField("Notes", text: $notesText, axis: .vertical)
@@ -368,6 +437,7 @@ struct ContentView: View {
                         self.locationText = ""
                         self.notesText = ""
                         self.selectedDay = 1
+                        self.selectedTime = Date()
                         self.showingAdd = false
                     }) {
                         Text("Cancel")
@@ -380,6 +450,10 @@ struct ContentView: View {
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
                         } else if selectedDay == 2 {
@@ -387,6 +461,10 @@ struct ContentView: View {
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
                         } else if selectedDay == 3 {
@@ -394,6 +472,10 @@ struct ContentView: View {
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
                         } else if selectedDay == 4 {
@@ -401,6 +483,10 @@ struct ContentView: View {
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
                         } else if selectedDay == 5 {
@@ -408,6 +494,10 @@ struct ContentView: View {
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
                         } else if selectedDay == 6 {
@@ -415,6 +505,10 @@ struct ContentView: View {
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
                         } else if selectedDay == 7 {
@@ -422,6 +516,10 @@ struct ContentView: View {
                             data.title = titleText
                             data.location = locationText
                             data.notes = notesText
+                            let selectTime = selectedTime
+                            let formatter = DateFormatter()
+                            formatter.timeStyle = .short
+                            data.dueTime = formatter.string(from: selectTime)
                             data.day = Int64(selectedDay)
                             PersistenceController.shared.save()
                         } else {
@@ -431,6 +529,7 @@ struct ContentView: View {
                         self.locationText = ""
                         self.notesText = ""
                         self.selectedDay = 1
+                        self.selectedTime = Date()
                         self.showingAdd = false
                     }) {
                         Text("Done")
@@ -438,7 +537,6 @@ struct ContentView: View {
                     .disabled(addDisabled)
                 }
             }
-            .toolbarRole(.navigationStack)
             .onChange(of: titleText) { newValue in
                 if titleText != "" {
                     addDisabled = false
@@ -457,7 +555,7 @@ struct ContentView: View {
     var settings: some View {
         NavigationStack {
             Form {
-                Section(header: Label("Permissions", systemImage: "lock")) {
+                Section(header: Label("Notifications", systemImage: "calendar")) {
                     Button(action: {UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                         if success {
                             print("Authorised")
@@ -493,15 +591,15 @@ struct ContentView: View {
                         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                         UNUserNotificationCenter.current().add(request)
                     }) {
-                        Text("Request Notification Permissions")
+                        Text("Schedule Notifications")
                     }
-                    .alert("Authorised Notifications", isPresented: $showingNotificationAlert) {
+                    .alert("Notifications Scheduled", isPresented: $showingNotificationAlert) {
                         Button(action: {self.showingNotificationAlert = false}) {
                             Text("Done")
                         }
                     }
                     Button(action: {UNUserNotificationCenter.current().removeAllPendingNotificationRequests()}) {
-                        Text("Clear All Scheduled Notifications")
+                        Text("Clear Scheduled Notifications")
                     }
                 }
                 Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {

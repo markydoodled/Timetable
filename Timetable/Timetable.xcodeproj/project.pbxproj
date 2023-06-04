@@ -49,6 +49,7 @@
 		D51F7A6B29093E01007637E9 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D51F7A6429093DF9007637E9 /* TaskModel.xcdatamodeld */; };
 		D51F7A6D29095E04007637E9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D51F7A6C29095E04007637E9 /* Settings.bundle */; };
 		D51F7A70290A74B3007637E9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F7A6F290A74B2007637E9 /* SettingsView.swift */; };
+		D5E594ED2A23C81D00636A76 /* WatchDatePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D5E594EC2A23C81D00636A76 /* WatchDatePicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5E594ED2A23C81D00636A76 /* WatchDatePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +467,9 @@
 				D51F7A5729093C54007637E9 /* PBXTargetDependency */,
 			);
 			name = "Timetable watchOS Watch App";
+			packageProductDependencies = (
+				D5E594EC2A23C81D00636A76 /* WatchDatePicker */,
+			);
 			productName = "Timetable watchOS Watch App";
 			productReference = D51F7A3429093C1B007637E9 /* Timetable.app */;
 			productType = "com.apple.product-type.application";
@@ -528,6 +533,9 @@
 				Base,
 			);
 			mainGroup = D51F79D429093B9A007637E9;
+			packageReferences = (
+				D5E594EB2A23C81D00636A76 /* XCRemoteSwiftPackageReference "watch-date-picker" */,
+			);
 			productRefGroup = D51F79DE29093B9A007637E9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -901,8 +909,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -940,8 +948,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1317,6 +1325,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D5E594EB2A23C81D00636A76 /* XCRemoteSwiftPackageReference "watch-date-picker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/freyaalminde/watch-date-picker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D5E594EC2A23C81D00636A76 /* WatchDatePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5E594EB2A23C81D00636A76 /* XCRemoteSwiftPackageReference "watch-date-picker" */;
+			productName = WatchDatePicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D51F7A6429093DF9007637E9 /* TaskModel.xcdatamodeld */ = {

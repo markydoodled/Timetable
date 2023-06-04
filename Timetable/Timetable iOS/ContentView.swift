@@ -71,6 +71,23 @@ struct ContentView: View {
                                 self.notesTextDetail = item.notes ?? "Error"
                                 self.selectedDay = Int(item.day)
                                 self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
                                 .onDisappear() {
                                     self.titleTextDetail = ""
@@ -112,6 +129,23 @@ struct ContentView: View {
                                 self.notesTextDetail = item.notes ?? "Error"
                                 self.selectedDay = Int(item.day)
                                 self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
                                 .onDisappear() {
                                     self.titleTextDetail = ""
@@ -153,6 +187,23 @@ struct ContentView: View {
                                 self.notesTextDetail = item.notes ?? "Error"
                                 self.selectedDay = Int(item.day)
                                 self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
                                 .onDisappear() {
                                     self.titleTextDetail = ""
@@ -194,6 +245,23 @@ struct ContentView: View {
                                 self.notesTextDetail = item.notes ?? "Error"
                                 self.selectedDay = Int(item.day)
                                 self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
                                 .onDisappear() {
                                     self.titleTextDetail = ""
@@ -235,6 +303,23 @@ struct ContentView: View {
                                 self.notesTextDetail = item.notes ?? "Error"
                                 self.selectedDay = Int(item.day)
                                 self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
                                 .onDisappear() {
                                     self.titleTextDetail = ""
@@ -276,6 +361,23 @@ struct ContentView: View {
                                 self.notesTextDetail = item.notes ?? "Error"
                                 self.selectedDay = Int(item.day)
                                 self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
                                 .onDisappear() {
                                     self.titleTextDetail = ""
@@ -317,6 +419,23 @@ struct ContentView: View {
                                 self.notesTextDetail = item.notes ?? "Error"
                                 self.selectedDay = Int(item.day)
                                 self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
                                 .onDisappear() {
                                     self.titleTextDetail = ""
@@ -764,25 +883,6 @@ struct ContentView: View {
                         .textSelection(.enabled)
                         .font(.title)
                 }
-            }
-        }
-        .onAppear() {
-            if selectedDay == 1 {
-                selectedDayDetail = "Monday"
-            } else if selectedDay == 2 {
-                selectedDayDetail = "Tuesday"
-            } else if selectedDay == 3 {
-                selectedDayDetail = "Wednesday"
-            } else if selectedDay == 4 {
-                selectedDayDetail = "Thursday"
-            } else if selectedDay == 5 {
-                selectedDayDetail = "Friday"
-            } else if selectedDay == 6 {
-                selectedDayDetail = "Saturday"
-            } else if selectedDay == 7 {
-                selectedDayDetail = "Sunday"
-            } else {
-                selectedDayDetail = "Day Error"
             }
         }
             .navigationTitle("\(titleTextDetail)")

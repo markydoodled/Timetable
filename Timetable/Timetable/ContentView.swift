@@ -87,7 +87,7 @@ struct ContentView: View {
                             }
                         }
                         .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -128,7 +128,7 @@ struct ContentView: View {
                             }
                         }
                         .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -169,7 +169,7 @@ struct ContentView: View {
                             }
                         }
                         .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -210,7 +210,7 @@ struct ContentView: View {
                             }
                         }
                         .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -251,7 +251,7 @@ struct ContentView: View {
                             }
                         }
                         .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -292,7 +292,7 @@ struct ContentView: View {
                             }
                         }
                         .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -333,7 +333,7 @@ struct ContentView: View {
                             }
                         }
                         .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
+                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -517,7 +517,7 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     HStack {
-                        Text("\(titleText)")
+                        Text("\(titleTextDetail)")
                             .textSelection(.enabled)
                             .font(.title)
                         Spacer()
@@ -531,7 +531,7 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     HStack {
-                        Text("\(locationText)")
+                        Text("\(locationTextDetail)")
                             .textSelection(.enabled)
                             .font(.title)
                         Spacer()
@@ -603,7 +603,7 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     HStack {
-                        Text("\(notesText)")
+                        Text("\(notesTextDetail)")
                             .textSelection(.enabled)
                             .font(.title)
                         Spacer()
@@ -615,29 +615,10 @@ struct ContentView: View {
             .padding(.horizontal)
         }
         .padding(.vertical)
-        .onAppear() {
-            if selectedDay == 1 {
-                selectedDayDetail = "Monday"
-            } else if selectedDay == 2 {
-                selectedDayDetail = "Tuesday"
-            } else if selectedDay == 3 {
-                selectedDayDetail = "Wednesday"
-            } else if selectedDay == 4 {
-                selectedDayDetail = "Thursday"
-            } else if selectedDay == 5 {
-                selectedDayDetail = "Friday"
-            } else if selectedDay == 6 {
-                selectedDayDetail = "Saturday"
-            } else if selectedDay == 7 {
-                selectedDayDetail = "Sunday"
-            } else {
-                selectedDayDetail = "Day Error"
-            }
-        }
-        .navigationTitle("\(titleText)")
+        .navigationTitle("\(titleTextDetail)")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                ShareLink(item: "\(titleText)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationText)\n\(notesText)")
+                ShareLink(item: "\(titleTextDetail)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)\n\(notesTextDetail)")
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: {self.showingAdd = true}) {

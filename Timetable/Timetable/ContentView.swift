@@ -1,16 +1,18 @@
 //
 //  ContentView.swift
-//  Timetable
+//  Timetable iOS
 //
 //  Created by Mark Howard on 26/10/2022.
 //
 
 import SwiftUI
+import UserNotifications
 import CoreData
+import MessageUI
 
 struct ContentView: View {
-    @State var showingShare = false
     @State var showingAdd = false
+    @State var showingSettings = false
     @State var showingNotificationAlert = false
     @State var addDisabled = true
     @State var titleText = ""
@@ -24,6 +26,8 @@ struct ContentView: View {
     @State var selectedTime = Date()
     @State var selectedTimeDetail = ""
     @State var day = 1
+    @State var result: Result<MFMailComposeResult, Error>? = nil
+    @State var isShowingMailView = false
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Monday.entity(),
                   sortDescriptors: [],
@@ -53,356 +57,534 @@ struct ContentView: View {
                   sortDescriptors: [],
             animation: .default)
     private var items7: FetchedResults<Sunday>
+    //Home Screen View
     var body: some View {
-        NavigationSplitView {
-            List {
-                Section(header: Label("Monday", systemImage: "1.circle")) {
-                    ForEach(items) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.red)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+            NavigationStack {
+                List {
+                    Section(header: Label("Monday", systemImage: "1.circle")) {
+                        ForEach(items) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
                             }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
-                        }
-                    }
-                    .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items[index])
-                            }
-                            PersistenceController.shared.save()
-                        }
-                }
-                Section(header: Label("Tuesday", systemImage: "2.circle")) {
-                    ForEach(items2) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.orange)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                                .onDisappear() {
+                                    self.titleTextDetail = ""
+                                    self.locationTextDetail = ""
+                                    self.notesTextDetail = ""
+                                    self.selectedDay = 1
+                                    self.selectedTimeDetail = ""
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.red)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
                             }
                         }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
-                        }
-                    }
-                    .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items2[index])
-                            }
-                            PersistenceController.shared.save()
-                        }
-                }
-                Section(header: Label("Wednesday", systemImage: "3.circle")) {
-                    ForEach(items3) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.yellow)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items[index])
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
+                                PersistenceController.shared.save()
                             }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
-                        }
                     }
-                    .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items3[index])
-                            }
-                            PersistenceController.shared.save()
-                        }
-                }
-                Section(header: Label("Thursday", systemImage: "4.circle")) {
-                    ForEach(items4) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.green)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                    Section(header: Label("Tuesday", systemImage: "2.circle")) {
+                        ForEach(items2) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
                             }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
-                        }
-                    }
-                    .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items4[index])
-                            }
-                            PersistenceController.shared.save()
-                        }
-                }
-                Section(header: Label("Friday", systemImage: "5.circle")) {
-                    ForEach(items5) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.cyan)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                                .onDisappear() {
+                                    self.titleTextDetail = ""
+                                    self.locationTextDetail = ""
+                                    self.notesTextDetail = ""
+                                    self.selectedDay = 1
+                                    self.selectedTimeDetail = ""
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.orange)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
                             }
                         }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
-                        }
-                    }
-                    .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items5[index])
-                            }
-                            PersistenceController.shared.save()
-                        }
-                }
-                Section(header: Label("Saturday", systemImage: "6.circle")) {
-                    ForEach(items6) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.pink)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items2[index])
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
+                                PersistenceController.shared.save()
                             }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
-                        }
                     }
-                    .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items6[index])
-                            }
-                            PersistenceController.shared.save()
-                        }
-                }
-                Section(header: Label("Sunday", systemImage: "7.circle")) {
-                    ForEach(items7) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.purple)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                    Section(header: Label("Wednesday", systemImage: "3.circle")) {
+                        ForEach(items3) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
+                            }
+                                .onDisappear() {
+                                    self.titleTextDetail = ""
+                                    self.locationTextDetail = ""
+                                    self.notesTextDetail = ""
+                                    self.selectedDay = 1
+                                    self.selectedTimeDetail = ""
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.yellow)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
+                                }
                             }
                         }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(item.title ?? "Error")\n\(item.dueTime ?? "Error")\n\(item.location ?? "Error")") as NSString)
-                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items3[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
                     }
-                    .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items7[index])
+                    Section(header: Label("Thursday", systemImage: "4.circle")) {
+                        ForEach(items4) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                            PersistenceController.shared.save()
+                                .onDisappear() {
+                                    self.titleTextDetail = ""
+                                    self.locationTextDetail = ""
+                                    self.notesTextDetail = ""
+                                    self.selectedDay = 1
+                                    self.selectedTimeDetail = ""
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.green)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
                         }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items4[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
+                    Section(header: Label("Friday", systemImage: "5.circle")) {
+                        ForEach(items5) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
+                            }
+                                .onDisappear() {
+                                    self.titleTextDetail = ""
+                                    self.locationTextDetail = ""
+                                    self.notesTextDetail = ""
+                                    self.selectedDay = 1
+                                    self.selectedTimeDetail = ""
+                                }) {
+                                    VStack(alignment: .leading) {
+                                        Text(item.title ?? "Error")
+                                            .bold()
+                                            .font(.title)
+                                            .foregroundColor(.cyan)
+                                        if item.location != "" {
+                                            Text(item.location ?? "Error")
+                                                .font(.title2)
+                                        }
+                                        Text(item.dueTime ?? "Error")
+                                            .font(.title3)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items5[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
+                    Section(header: Label("Saturday", systemImage: "6.circle")) {
+                        ForEach(items6) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
+                            }
+                                .onDisappear() {
+                                    self.titleTextDetail = ""
+                                    self.locationTextDetail = ""
+                                    self.notesTextDetail = ""
+                                    self.selectedDay = 1
+                                    self.selectedTimeDetail = ""
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.pink)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items6[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
+                    Section(header: Label("Sunday", systemImage: "7.circle")) {
+                        ForEach(items7) { item in
+                            NavigationLink(destination: detail.onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
+                            }
+                                .onDisappear() {
+                                    self.titleTextDetail = ""
+                                    self.locationTextDetail = ""
+                                    self.notesTextDetail = ""
+                                    self.selectedDay = 1
+                                    self.selectedTimeDetail = ""
+                                }) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.purple)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                        .onDelete { indexSet in
+                                for index in indexSet {
+                                    managedObjectContext.delete(items7[index])
+                                }
+                                PersistenceController.shared.save()
+                            }
+                    }
                 }
-            }
-            .listStyle(.sidebar)
-            .frame(minWidth: 200)
-        } detail: {
-            Image("AppsIcon")
-                .resizable()
-                .cornerRadius(25)
-                .frame(width: 150, height: 150)
+                .listStyle(.sidebar)
+                #if !targetEnvironment(macCatalyst)
                 .navigationTitle("Timetable")
+                #endif
                 .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {self.showingSettings = true}) {
+                            Image(systemName: "gearshape")
+                        }
+                        .keyboardShortcut(",")
+                        .sheet(isPresented: $showingSettings) {
+                            settings
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {self.showingAdd = true}) {
                             Image(systemName: "plus")
                         }
                         .keyboardShortcut("n", modifiers: [.command, .shift])
                         .sheet(isPresented: $showingAdd) {
                             add
-                                .frame(width: 500, height: 250)
-                                .padding()
+                                .presentationDetents([.medium, .large])
+                                .presentationDragIndicator(.visible)
                         }
                     }
                 }
-        }
+            }
     }
-    var add: some View {
+    //Detail View
+    var detail: some View {
         Form {
-            Section {
-                TextField("Title", text: $titleText)
-                TextField("Location", text: $locationText)
+            Section(header: Label("Title", systemImage: "textformat")) {
+                Text("\(titleTextDetail)")
+                    .textSelection(.enabled)
+                    .font(.title)
             }
-            .padding(.bottom)
-            Section {
-                Picker("Day", selection: $selectedDay) {
-                    Text("Monday")
-                        .tag(1)
-                    Text("Tuesday")
-                        .tag(2)
-                    Text("Wednesday")
-                        .tag(3)
-                    Text("Thursday")
-                        .tag(4)
-                    Text("Friday")
-                        .tag(5)
-                    Text("Saturday")
-                        .tag(6)
-                    Text("Sunday")
-                        .tag(7)
+            if locationTextDetail != "" {
+                Section(header: Label("Location", systemImage: "location.fill")) {
+                    Text("\(locationTextDetail)")
+                        .textSelection(.enabled)
+                        .font(.title)
                 }
-                DatePicker("Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
-                    .datePickerStyle(.compact)
             }
-            .padding(.bottom)
-            Section {
-                TextField("Notes", text: $notesText)
-                    .lineLimit(5)
+            Section(header: Label("Day", systemImage: "calendar")) {
+                if selectedDay == 1 {
+                    Text("Monday")
+                        .textSelection(.enabled)
+                        .font(.title)
+                } else if selectedDay == 2 {
+                    Text("Tuesday")
+                        .textSelection(.enabled)
+                        .font(.title)
+                } else if selectedDay == 3 {
+                    Text("Wednesday")
+                        .textSelection(.enabled)
+                        .font(.title)
+                } else if selectedDay == 4 {
+                    Text("Thursday")
+                        .textSelection(.enabled)
+                        .font(.title)
+                } else if selectedDay == 5 {
+                    Text("Friday")
+                        .textSelection(.enabled)
+                        .font(.title)
+                } else if selectedDay == 6 {
+                    Text("Saturday")
+                        .textSelection(.enabled)
+                        .font(.title)
+                } else if selectedDay == 7 {
+                    Text("Sunday")
+                        .textSelection(.enabled)
+                        .font(.title)
+                } else {
+                    Text("Day Error")
+                        .textSelection(.enabled)
+                        .font(.title)
+                }
             }
-            .padding(.bottom)
-            VStack {
-                HStack {
-                    Spacer()
+            Section(header: Label("Time", systemImage: "calendar.badge.clock")) {
+                Text("\(selectedTimeDetail)")
+                    .textSelection(.enabled)
+                    .font(.title)
+            }
+            if notesTextDetail != "" {
+                Section(header: Label("Notes", systemImage: "note.text")) {
+                    Text("\(notesTextDetail)")
+                        .textSelection(.enabled)
+                        .font(.title)
+                }
+            }
+        }
+            .navigationTitle("\(titleTextDetail)")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ShareLink(item: "\(titleTextDetail)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)\n\(notesTextDetail)")
+                }
+            }
+    }
+    //Add Event View
+    var add: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Title", text: $titleText)
+                    TextField("Location", text: $locationText)
+                }
+                Section {
+                    Picker("Day", selection: $selectedDay) {
+                        Text("Monday")
+                            .tag(1)
+                        Text("Tuesday")
+                            .tag(2)
+                        Text("Wednesday")
+                            .tag(3)
+                        Text("Thursday")
+                            .tag(4)
+                        Text("Friday")
+                            .tag(5)
+                        Text("Saturday")
+                            .tag(6)
+                        Text("Sunday")
+                            .tag(7)
+                    }
+                    DatePicker("Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.graphical)
+                }
+                Section {
+                    TextField("Notes", text: $notesText, axis: .vertical)
+                        .lineLimit(5)
+                }
+            }
+            .navigationTitle("Add")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         self.titleText = ""
                         self.locationText = ""
@@ -410,10 +592,10 @@ struct ContentView: View {
                         self.selectedDay = 1
                         self.selectedTime = Date()
                         self.showingAdd = false}) {
-                            Text("Cancel")
-                        }
-                        .buttonStyle(.bordered)
-                    Spacer()
+                        Text("Cancel")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         if selectedDay == 1 {
                             let data = Monday(context: managedObjectContext)
@@ -500,157 +682,171 @@ struct ContentView: View {
                         self.notesText = ""
                         self.selectedDay = 1
                         self.selectedTime = Date()
-                        self.showingAdd = false
-                    }) {
+                        self.showingAdd = false}) {
                         Text("Done")
                     }
-                    .buttonStyle(.borderedProminent)
-                    Spacer()
+                        .disabled(addDisabled)
                 }
             }
-            .padding(.bottom)
+        }
+        .onChange(of: titleText) { newValue in
+            if titleText != "" {
+                addDisabled = false
+            } else {
+                addDisabled = true
+            }
+        }
+        .onAppear() {
+            if titleText == "" {
+                addDisabled = true
+            }
         }
     }
-    var detail: some View {
-        Form {
-            GroupBox(label: Label("Title", systemImage: "textformat")) {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Text("\(titleText)")
-                            .textSelection(.enabled)
-                            .font(.title)
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-                    Spacer()
-                }
-            }
-            .padding(.horizontal)
-            GroupBox(label: Label("Location", systemImage: "location.fill")) {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Text("\(locationText)")
-                            .textSelection(.enabled)
-                            .font(.title)
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-                    Spacer()
-                }
-            }
-            .padding(.horizontal)
-            GroupBox(label: Label("Day", systemImage: "calendar")) {
-                VStack {
-                    Spacer()
-                    HStack {
-                        if selectedDay == 1 {
-                            Text("Monday")
-                                .textSelection(.enabled)
-                                .font(.title)
-                        } else if selectedDay == 2 {
-                            Text("Tuesday")
-                                .textSelection(.enabled)
-                                .font(.title)
-                        } else if selectedDay == 3 {
-                            Text("Wednesday")
-                                .textSelection(.enabled)
-                                .font(.title)
-                        } else if selectedDay == 4 {
-                            Text("Thursday")
-                                .textSelection(.enabled)
-                                .font(.title)
-                        } else if selectedDay == 5 {
-                            Text("Friday")
-                                .textSelection(.enabled)
-                                .font(.title)
-                        } else if selectedDay == 6 {
-                            Text("Saturday")
-                                .textSelection(.enabled)
-                                .font(.title)
-                        } else if selectedDay == 7 {
-                            Text("Sunday")
-                                .textSelection(.enabled)
-                                .font(.title)
-                        } else {
-                            Text("Day Error")
-                                .textSelection(.enabled)
-                                .font(.title)
+    //Settings View
+    var settings: some View {
+        NavigationStack {
+            Form {
+                Section(header: Label("Notifications", systemImage: "calendar")) {
+                    Button(action: {UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            print("Authorised")
+                            self.showingNotificationAlert = true
+                        } else if let error = error {
+                            print(error.localizedDescription)
                         }
-                        Spacer()
                     }
-                    .padding(.horizontal)
-                    Spacer()
-                }
-            }
-            .padding(.horizontal)
-            GroupBox(label: Label("Time", systemImage: "calendar.badge.clock")) {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Text("\(selectedTimeDetail)")
-                            .textSelection(.enabled)
-                            .font(.title)
-                        Spacer()
+                        let dateF = Date()
+                        let formatter = DateFormatter()
+                        formatter.dateStyle = .full
+                        formatter.dateFormat = "EEEE"
+                        let dateOut = formatter.string(from: dateF)
+                        if dateOut == "Monday" {
+                            day = 1
+                        } else if dateOut == "Tuesday" {
+                            day = 2
+                        } else if dateOut == "Wednesday" {
+                            day = 3
+                        } else if dateOut == "Thursday" {
+                            day = 4
+                        } else if dateOut == "Friday" {
+                            day = 5
+                        } else if dateOut == "Saturday" {
+                            day = 6
+                        } else if dateOut == "Sunday" {
+                            day = 7
+                        } else {
+                            day = 8
+                        }
+                        let content = UNMutableNotificationContent()
+                        content.title = "Happening First Today"
+                        if selectedDay == 1 {
+                            content.subtitle = "Monday - \(items.first?.title ?? "None")"
+                        } else if selectedDay == 2 {
+                            content.subtitle = "Tuesday - \(items2.first?.title ?? "None")"
+                        } else if selectedDay == 3 {
+                            content.subtitle = "Wednesday - \(items3.first?.title ?? "None")"
+                        } else if selectedDay == 4 {
+                            content.subtitle = "Thursday - \(items4.first?.title ?? "None")"
+                        } else if selectedDay == 5 {
+                            content.subtitle = "Friday - \(items5.first?.title ?? "None")"
+                        } else if selectedDay == 6 {
+                            content.subtitle = "Saturday - \(items6.first?.title ?? "None")"
+                        } else if selectedDay == 7 {
+                            content.subtitle = "Sunday - \(items7.first?.title ?? "None")"
+                        } else {
+                            content.subtitle = "Unrecognised Day"
+                        }
+                        content.sound = UNNotificationSound.default
+                        var date = DateComponents()
+                        date.hour = 9
+                        date.minute = 0
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request)
+                    }) {
+                        Text("Schedule Notifications")
                     }
-                    .padding(.horizontal)
-                    Spacer()
-                }
-            }
-            .padding(.horizontal)
-            GroupBox(label: Label("Notes", systemImage: "note.text")) {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Text("\(notesText)")
-                            .textSelection(.enabled)
-                            .font(.title)
-                        Spacer()
+                    .alert("Notifications Scheduled", isPresented: $showingNotificationAlert) {
+                        Button(action: {self.showingNotificationAlert = false}) {
+                            Text("Done")
+                        }
                     }
-                    .padding(.horizontal)
-                    Spacer()
+                    Button(action: {UNUserNotificationCenter.current().removeAllPendingNotificationRequests()}) {
+                        Text("Clear Scheduled Notifications")
+                    }
+                    #if !targetEnvironment(macCatalyst)
+                    Button(action: {UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)}) {
+                        Text("Open Settings")
+                    }
+                    #endif
+                }
+                Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
+                    LabeledContent("Version") {
+                        Text("1.1")
+                    }
+                    LabeledContent("Build") {
+                        Text("6")
+                    }
+                    Button(action: {self.isShowingMailView.toggle()}) {
+                        Text("Send Feedback")
+                    }
+                    .sheet(isPresented: $isShowingMailView) {
+                        MailView(isShowing: self.$isShowingMailView, result: self.$result)
+                    }
                 }
             }
-            .padding(.horizontal)
-        }
-        .padding(.vertical)
-        .onAppear() {
-            if selectedDay == 1 {
-                selectedDayDetail = "Monday"
-            } else if selectedDay == 2 {
-                selectedDayDetail = "Tuesday"
-            } else if selectedDay == 3 {
-                selectedDayDetail = "Wednesday"
-            } else if selectedDay == 4 {
-                selectedDayDetail = "Thursday"
-            } else if selectedDay == 5 {
-                selectedDayDetail = "Friday"
-            } else if selectedDay == 6 {
-                selectedDayDetail = "Saturday"
-            } else if selectedDay == 7 {
-                selectedDayDetail = "Sunday"
-            } else {
-                selectedDayDetail = "Day Error"
-            }
-        }
-        .navigationTitle("\(titleText)")
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                ShareLink(item: "\(titleText)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationText)\n\(notesText)")
-            }
-            ToolbarItem(placement: .confirmationAction) {
-                Button(action: {self.showingAdd = true}) {
-                    Image(systemName: "plus")
-                }
-                .keyboardShortcut("n", modifiers: [.command, .shift])
-                .sheet(isPresented: $showingAdd) {
-                    add
-                        .frame(width: 500, height: 250)
-                        .padding()
+            .navigationTitle("Settings")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {self.showingSettings = false}) {
+                        Text("Done")
+                    }
                 }
             }
         }
+    }
+}
+
+//Mail Feedback View
+struct MailView: UIViewControllerRepresentable {
+    @Binding var isShowing: Bool
+    @Binding var result: Result<MFMailComposeResult, Error>?
+    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+        @Binding var isShowing: Bool
+        @Binding var result: Result<MFMailComposeResult, Error>?
+        init(isShowing: Binding<Bool>,
+             result: Binding<Result<MFMailComposeResult, Error>?>) {
+            _isShowing = isShowing
+            _result = result
+        }
+        func mailComposeController(_ controller: MFMailComposeViewController,
+                                   didFinishWith result: MFMailComposeResult,
+                                   error: Error?) {
+            defer {
+                isShowing = false
+            }
+            guard error == nil else {
+                self.result = .failure(error!)
+                return
+            }
+            self.result = .success(result)
+        }
+    }
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(isShowing: $isShowing,
+                           result: $result)
+    }
+    func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
+        let vc = MFMailComposeViewController()
+        vc.mailComposeDelegate = context.coordinator
+        vc.setToRecipients(["markhoward2005@gmail.com"])
+        vc.setSubject("Timetable App Feedback")
+        vc.setMessageBody("Rating: \nBugs: \nFeature Request: \nOther Notes: ", isHTML: false)
+        return vc
+    }
+    func updateUIViewController(_ uiViewController: MFMailComposeViewController,
+                                context: UIViewControllerRepresentableContext<MailView>) {
+        
     }
 }
 
@@ -659,3 +855,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

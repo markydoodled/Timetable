@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D51F79F229093BB6007637E9"
-               BuildableName = "Timetable iOS.app"
-               BlueprintName = "Timetable iOS"
+               BuildableName = "Timetable.app"
+               BlueprintName = "Timetable"
                ReferencedContainer = "container:Timetable.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -60,8 +60,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D51F79F229093BB6007637E9"
-            BuildableName = "Timetable iOS.app"
-            BlueprintName = "Timetable iOS"
+            BuildableName = "Timetable.app"
+            BlueprintName = "Timetable"
             ReferencedContainer = "container:Timetable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -96,8 +96,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D51F79F229093BB6007637E9"
-            BuildableName = "Timetable iOS.app"
-            BlueprintName = "Timetable iOS"
+            BuildableName = "Timetable.app"
+            BlueprintName = "Timetable"
             ReferencedContainer = "container:Timetable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

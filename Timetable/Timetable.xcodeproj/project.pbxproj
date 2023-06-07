@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D51F79F629093BB6007637E9 /* Timetable_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F79F529093BB6007637E9 /* Timetable_iOSApp.swift */; };
+		D51F79F629093BB6007637E9 /* TimetableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F79F529093BB6007637E9 /* TimetableApp.swift */; };
 		D51F79F829093BB6007637E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F79F729093BB6007637E9 /* ContentView.swift */; };
 		D51F79FA29093BBA007637E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51F79F929093BBA007637E9 /* Assets.xcassets */; };
 		D51F79FD29093BBA007637E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51F79FC29093BBA007637E9 /* Preview Assets.xcassets */; };
@@ -100,7 +100,7 @@
 
 /* Begin PBXFileReference section */
 		D51F79F329093BB6007637E9 /* Timetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D51F79F529093BB6007637E9 /* Timetable_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable_iOSApp.swift; sourceTree = "<group>"; };
+		D51F79F529093BB6007637E9 /* TimetableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableApp.swift; sourceTree = "<group>"; };
 		D51F79F729093BB6007637E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D51F79F929093BBA007637E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D51F79FC29093BBA007637E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 		D51F7A5D29093DC4007637E9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D51F7A6529093DF9007637E9 /* TaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskModel.xcdatamodel; sourceTree = "<group>"; };
 		D51F7A6C29095E04007637E9 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		D51F7A6E29096A87007637E9 /* Timetable-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timetable-iOS-Info.plist"; sourceTree = SOURCE_ROOT; };
-		D51F7A71290AB467007637E9 /* Timetable iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Timetable iOS.entitlements"; sourceTree = "<group>"; };
+		D51F7A6E29096A87007637E9 /* Timetable-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Timetable-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D51F7A71290AB467007637E9 /* Timetable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Timetable.entitlements; sourceTree = "<group>"; };
 		D51F7A72290AB467007637E9 /* Timetable Widget iOSExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Timetable Widget iOSExtension.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,7 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				D51F7A72290AB467007637E9 /* Timetable Widget iOSExtension.entitlements */,
-				D51F79F429093BB6007637E9 /* Timetable iOS */,
+				D51F79F429093BB6007637E9 /* Timetable */,
 				D51F7A0B29093BD1007637E9 /* Timetable Widget iOS */,
 				D51F7A3829093C1C007637E9 /* Timetable watchOS Watch App */,
 				D51F7A5029093C51007637E9 /* Timetable Widget watchOS */,
@@ -190,12 +190,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D51F79F429093BB6007637E9 /* Timetable iOS */ = {
+		D51F79F429093BB6007637E9 /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
-				D51F7A71290AB467007637E9 /* Timetable iOS.entitlements */,
-				D51F7A6E29096A87007637E9 /* Timetable-iOS-Info.plist */,
-				D51F79F529093BB6007637E9 /* Timetable_iOSApp.swift */,
+				D51F7A71290AB467007637E9 /* Timetable.entitlements */,
+				D51F7A6E29096A87007637E9 /* Timetable-Info.plist */,
+				D51F79F529093BB6007637E9 /* TimetableApp.swift */,
 				D51F79F729093BB6007637E9 /* ContentView.swift */,
 				D51F79F929093BBA007637E9 /* Assets.xcassets */,
 				D51F79FB29093BBA007637E9 /* Preview Content */,
@@ -203,7 +203,7 @@
 				D51F7A6429093DF9007637E9 /* TaskModel.xcdatamodeld */,
 				D51F7A6C29095E04007637E9 /* Settings.bundle */,
 			);
-			path = "Timetable iOS";
+			path = Timetable;
 			sourceTree = "<group>";
 		};
 		D51F79FB29093BBA007637E9 /* Preview Content */ = {
@@ -462,7 +462,7 @@
 				D51F7A5E29093DC4007637E9 /* Persistence.swift in Sources */,
 				D51F79F829093BB6007637E9 /* ContentView.swift in Sources */,
 				D51F7A6629093DF9007637E9 /* TaskModel.xcdatamodeld in Sources */,
-				D51F79F629093BB6007637E9 /* Timetable_iOSApp.swift in Sources */,
+				D51F79F629093BB6007637E9 /* TimetableApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,14 +643,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Timetable iOS/Timetable iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Timetable/Timetable.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_ASSET_PATHS = "\"Timetable iOS/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Timetable/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Timetable-iOS-Info.plist";
+				INFOPLIST_FILE = "Timetable-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Timetable;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -664,7 +664,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.Timetable-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MSJ.Timetable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -682,14 +682,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Timetable iOS/Timetable iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Timetable/Timetable.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_ASSET_PATHS = "\"Timetable iOS/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Timetable/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Timetable-iOS-Info.plist";
+				INFOPLIST_FILE = "Timetable-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Timetable;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -703,7 +703,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.Timetable-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MSJ.Timetable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

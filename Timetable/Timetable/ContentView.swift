@@ -108,9 +108,6 @@ struct ContentView: View {
                                         .foregroundColor(.secondary)
                                 }
                             }
-                            .onDrag {
-                                return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail))") as NSString)
-                            }
                         }
                         .onDelete { indexSet in
                                 for index in indexSet {
@@ -165,9 +162,6 @@ struct ContentView: View {
                                         .font(.title3)
                                         .foregroundColor(.secondary)
                                 }
-                            }
-                            .onDrag {
-                                return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                             }
                         }
                         .onDelete { indexSet in
@@ -224,9 +218,6 @@ struct ContentView: View {
                                         .foregroundColor(.secondary)
                                 }
                             }
-                            .onDrag {
-                                return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
-                            }
                         }
                         .onDelete { indexSet in
                                 for index in indexSet {
@@ -281,9 +272,6 @@ struct ContentView: View {
                                         .font(.title3)
                                         .foregroundColor(.secondary)
                                 }
-                            }
-                            .onDrag {
-                                return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                             }
                         }
                         .onDelete { indexSet in
@@ -340,9 +328,6 @@ struct ContentView: View {
                                             .foregroundColor(.secondary)
                                     }
                                 }
-                            .onDrag {
-                                return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
-                            }
                         }
                         .onDelete { indexSet in
                                 for index in indexSet {
@@ -397,9 +382,6 @@ struct ContentView: View {
                                         .font(.title3)
                                         .foregroundColor(.secondary)
                                 }
-                            }
-                            .onDrag {
-                                return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                             }
                         }
                         .onDelete { indexSet in
@@ -456,9 +438,6 @@ struct ContentView: View {
                                         .foregroundColor(.secondary)
                                 }
                             }
-                            .onDrag {
-                                return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
-                            }
                         }
                         .onDelete { indexSet in
                                 for index in indexSet {
@@ -469,7 +448,9 @@ struct ContentView: View {
                     }
                 }
                 .listStyle(.sidebar)
+                #if !targetEnvironment(macCatalyst)
                 .navigationTitle("Timetable")
+                #endif
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {self.showingSettings = true}) {
@@ -793,9 +774,11 @@ struct ContentView: View {
                     Button(action: {UNUserNotificationCenter.current().removeAllPendingNotificationRequests()}) {
                         Text("Clear Scheduled Notifications")
                     }
+                    #if !targetEnvironment(macCatalyst)
                     Button(action: {UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)}) {
                         Text("Open Settings")
                     }
+                    #endif
                 }
                 Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
                     LabeledContent("Version") {

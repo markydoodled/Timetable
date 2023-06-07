@@ -155,49 +155,7 @@ struct Timetable_Widget_iOSEntryView : View {
                 }
             }
         case .accessoryInline:
-            ZStack {
-                if day == 1 {
-                    Label("Timetable", systemImage: "1.circle")
-                } else if day == 2 {
-                    Label("Timetable", systemImage: "2.circle")
-                } else if day == 3 {
-                    Label("Timetable", systemImage: "3.circle")
-                } else if day == 4 {
-                    Label("Timetable", systemImage: "4.circle")
-                } else if day == 5 {
-                    Label("Timetable", systemImage: "5.circle")
-                } else if day == 6 {
-                    Label("Timetable", systemImage: "6.circle")
-                } else if day == 7 {
-                    Label("Timetable", systemImage: "7.circle")
-                } else {
-                    Text("Error Day Select")
-                }
-            }
-            .onAppear() {
-                let date = Date()
-                let formatter = DateFormatter()
-                formatter.dateStyle = .full
-                formatter.dateFormat = "EEEE"
-                let dateOut = formatter.string(from: date)
-                if dateOut == "Monday" {
-                    day = 1
-                } else if dateOut == "Tuesday" {
-                    day = 2
-                } else if dateOut == "Wednesday" {
-                    day = 3
-                } else if dateOut == "Thursday" {
-                    day = 4
-                } else if dateOut == "Friday" {
-                    day = 5
-                } else if dateOut == "Saturday" {
-                    day = 6
-                } else if dateOut == "Sunday" {
-                    day = 7
-                } else {
-                    day = 8
-                }
-            }
+            Text("Unused")
         case .accessoryRectangular:
             HStack {
             VStack(alignment: .leading) {
@@ -290,7 +248,7 @@ struct Timetable_Widget_iOS: Widget {
         }
         .configurationDisplayName("Timetable")
         .description("Shortcut To The App.")
-        .supportedFamilies([.systemSmall, .accessoryInline, .accessoryRectangular])
+        .supportedFamilies([.systemSmall, .accessoryRectangular])
     }
 }
 

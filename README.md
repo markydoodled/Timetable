@@ -4,9 +4,12 @@ A SwiftUI App That Displays A Timetable Events In A List.
 ## Supported Platforms
 - iOS 16.0+
 - watchOS 9.0+
-- macOS 12.3+
+- macOS 13.0+
 
 ## Features
+- iOS App
+- watchOS App
+- macOS (Catalyst) App
 - Widget Support (iOS And macOS)
 - Complication Support (watchOS)
 - Keyboard Shortcuts (iOS And macOS)
@@ -14,7 +17,6 @@ A SwiftUI App That Displays A Timetable Events In A List.
 - Feedback Button (iOS And macOS)
 - Shareable Tasks (iOS And macOS)
 - Open Settings App Shortcut (iOS)
-- Drag And Drop Support (iOS And macOS)
 - Copy Task Information (iOS And macOS)
  
 ## Releases

@@ -19,7 +19,7 @@
 		D51F7A0A29093BD1007637E9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51F7A0929093BD1007637E9 /* SwiftUI.framework */; };
 		D51F7A0D29093BD1007637E9 /* Timetable_Widget_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F7A0C29093BD1007637E9 /* Timetable_Widget_iOS.swift */; };
 		D51F7A0F29093BD4007637E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51F7A0E29093BD4007637E9 /* Assets.xcassets */; };
-		D51F7A1329093BD4007637E9 /* Timetable Widget iOSExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D51F7A0529093BD1007637E9 /* Timetable Widget iOSExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D51F7A1329093BD4007637E9 /* Timetable Widget iOSExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D51F7A0529093BD1007637E9 /* Timetable Widget iOSExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D51F7A1D29093BE9007637E9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51F7A0729093BD1007637E9 /* WidgetKit.framework */; };
 		D51F7A1E29093BE9007637E9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51F7A0929093BD1007637E9 /* SwiftUI.framework */; };
 		D51F7A2129093BEA007637E9 /* Timetable_Widget_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F7A2029093BEA007637E9 /* Timetable_Widget_macOS.swift */; };
@@ -683,7 +683,6 @@
 /* Begin PBXTargetDependency section */
 		D51F7A1229093BD4007637E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = D51F7A0429093BD1007637E9 /* Timetable Widget iOSExtension */;
 			targetProxy = D51F7A1129093BD4007637E9 /* PBXContainerItemProxy */;
 		};
@@ -993,7 +992,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1025,7 +1024,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

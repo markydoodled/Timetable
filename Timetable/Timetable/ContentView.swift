@@ -58,37 +58,109 @@ struct ContentView: View {
             List {
                 Section(header: Label("Monday", systemImage: "1.circle")) {
                     ForEach(items) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.red)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        NavigationLink(value: 1) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.red)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
+                        }
+                            .navigationDestination(for: Int.self) { target in
+                                switch target {
+                                case 1:
+                                    detail
+                                        .onAppear() {
+                                            print("1")
+                                            self.titleTextDetail = item.title ?? "Error"
+                                            self.locationTextDetail = item.location ?? "Error"
+                                            self.notesTextDetail = item.notes ?? "Error"
+                                            self.selectedDay = Int(item.day)
+                                            self.selectedTimeDetail = item.dueTime ?? "Error"
+                                            if selectedDay == 1 {
+                                                selectedDayDetail = "Monday"
+                                            } else if selectedDay == 2 {
+                                                selectedDayDetail = "Tuesday"
+                                            } else if selectedDay == 3 {
+                                                selectedDayDetail = "Wednesday"
+                                            } else if selectedDay == 4 {
+                                                selectedDayDetail = "Thursday"
+                                            } else if selectedDay == 5 {
+                                                selectedDayDetail = "Friday"
+                                            } else if selectedDay == 6 {
+                                                selectedDayDetail = "Saturday"
+                                            } else if selectedDay == 7 {
+                                                selectedDayDetail = "Sunday"
+                                            } else {
+                                                selectedDayDetail = "Day Error"
+                                            }
+                                        }
+                                case 2:
+                                    detail
+                                        .onAppear() {
+                                            print("2")
+                                            self.titleTextDetail = item.title ?? "Error"
+                                            self.locationTextDetail = item.location ?? "Error"
+                                            self.notesTextDetail = item.notes ?? "Error"
+                                            self.selectedDay = Int(item.day)
+                                            self.selectedTimeDetail = item.dueTime ?? "Error"
+                                            if selectedDay == 1 {
+                                                selectedDayDetail = "Monday"
+                                            } else if selectedDay == 2 {
+                                                selectedDayDetail = "Tuesday"
+                                            } else if selectedDay == 3 {
+                                                selectedDayDetail = "Wednesday"
+                                            } else if selectedDay == 4 {
+                                                selectedDayDetail = "Thursday"
+                                            } else if selectedDay == 5 {
+                                                selectedDayDetail = "Friday"
+                                            } else if selectedDay == 6 {
+                                                selectedDayDetail = "Saturday"
+                                            } else if selectedDay == 7 {
+                                                selectedDayDetail = "Sunday"
+                                            } else {
+                                                selectedDayDetail = "Day Error"
+                                            }
+                                        }
+                                case 3:
+                                    detail
+                                        .onAppear() {
+                                            print("3")
+                                        }
+                                case 4:
+                                    detail
+                                        .onAppear() {
+                                            print("4")
+                                        }
+                                case 5:
+                                    detail
+                                        .onAppear() {
+                                            print("5")
+                                        }
+                                case 6:
+                                    detail
+                                        .onAppear() {
+                                            print("6")
+                                        }
+                                case 7:
+                                    detail
+                                        .onAppear() {
+                                            print("7")
+                                        }
+                                default:
+                                    detail
+                                        .onAppear() {
+                                            print("Default View")
+                                        }
+                                }
                             }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
-                        }
                     }
                     .onDelete { indexSet in
                             for index in indexSet {
@@ -99,37 +171,21 @@ struct ContentView: View {
                 }
                 Section(header: Label("Tuesday", systemImage: "2.circle")) {
                     ForEach(items2) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.orange)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
-                                }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
-                        }
+                       NavigationLink(value: 2) {
+                               VStack(alignment: .leading) {
+                                   Text(item.title ?? "Error")
+                                       .bold()
+                                       .font(.title)
+                                       .foregroundColor(.orange)
+                                   if item.location != "" {
+                                       Text(item.location ?? "Error")
+                                           .font(.title2)
+                                   }
+                                   Text(item.dueTime ?? "Error")
+                                       .font(.title3)
+                                       .foregroundColor(.secondary)
+                               }
+                       }
                     }
                     .onDelete { indexSet in
                             for index in indexSet {
@@ -140,36 +196,20 @@ struct ContentView: View {
                 }
                 Section(header: Label("Wednesday", systemImage: "3.circle")) {
                     ForEach(items3) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.yellow)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        NavigationLink(value: 3) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.yellow)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -181,36 +221,20 @@ struct ContentView: View {
                 }
                 Section(header: Label("Thursday", systemImage: "4.circle")) {
                     ForEach(items4) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.green)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        NavigationLink(value: 4) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.green)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -222,36 +246,20 @@ struct ContentView: View {
                 }
                 Section(header: Label("Friday", systemImage: "5.circle")) {
                     ForEach(items5) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.cyan)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        NavigationLink(value: 5) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.cyan)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -263,36 +271,20 @@ struct ContentView: View {
                 }
                 Section(header: Label("Saturday", systemImage: "6.circle")) {
                     ForEach(items6) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.pink)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        NavigationLink(value: 6) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.pink)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -304,36 +296,20 @@ struct ContentView: View {
                 }
                 Section(header: Label("Sunday", systemImage: "7.circle")) {
                     ForEach(items7) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                        }
-                            .onDisappear() {
-                                self.titleTextDetail = ""
-                                self.locationTextDetail = ""
-                                self.notesTextDetail = ""
-                                self.selectedDay = 1
-                                self.selectedTimeDetail = ""
-                            }) {
-                            VStack(alignment: .leading) {
-                                Text(item.title ?? "Error")
-                                    .bold()
-                                    .font(.title)
-                                    .foregroundColor(.purple)
-                                if item.location != "" {
-                                    Text(item.location ?? "Error")
-                                        .font(.title2)
+                        NavigationLink(value: 7) {
+                                VStack(alignment: .leading) {
+                                    Text(item.title ?? "Error")
+                                        .bold()
+                                        .font(.title)
+                                        .foregroundColor(.purple)
+                                    if item.location != "" {
+                                        Text(item.location ?? "Error")
+                                            .font(.title2)
+                                    }
+                                    Text(item.dueTime ?? "Error")
+                                        .font(.title3)
+                                        .foregroundColor(.secondary)
                                 }
-                                Text(item.dueTime ?? "Error")
-                                    .font(.title3)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .onDrag {
-                            return NSItemProvider(object: String("\(titleTextDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)") as NSString)
                         }
                     }
                     .onDelete { indexSet in
@@ -344,7 +320,8 @@ struct ContentView: View {
                         }
                 }
             }
-            .listStyle(.sidebar)
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
             .frame(minWidth: 200)
         } detail: {
             Image("AppsIcon")

@@ -12,33 +12,19 @@ import WatchDatePicker
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(entity: Monday.entity(),
-                  sortDescriptors: [],
-            animation: .default)
+    @FetchRequest(entity: Monday.entity(), sortDescriptors: [], animation: .default)
     private var items: FetchedResults<Monday>
-    @FetchRequest(entity: Tuesday.entity(),
-                  sortDescriptors: [],
-            animation: .default)
+    @FetchRequest(entity: Tuesday.entity(), sortDescriptors: [], animation: .default)
     private var items2: FetchedResults<Tuesday>
-    @FetchRequest(entity: Wednesday.entity(),
-                  sortDescriptors: [],
-            animation: .default)
+    @FetchRequest(entity: Wednesday.entity(), sortDescriptors: [], animation: .default)
     private var items3: FetchedResults<Wednesday>
-    @FetchRequest(entity: Thursday.entity(),
-                  sortDescriptors: [],
-            animation: .default)
+    @FetchRequest(entity: Thursday.entity(), sortDescriptors: [], animation: .default)
     private var items4: FetchedResults<Thursday>
-    @FetchRequest(entity: Friday.entity(),
-                  sortDescriptors: [],
-            animation: .default)
+    @FetchRequest(entity: Friday.entity(), sortDescriptors: [], animation: .default)
     private var items5: FetchedResults<Friday>
-    @FetchRequest(entity: Saturday.entity(),
-                  sortDescriptors: [],
-            animation: .default)
+    @FetchRequest(entity: Saturday.entity(), sortDescriptors: [], animation: .default)
     private var items6: FetchedResults<Saturday>
-    @FetchRequest(entity: Sunday.entity(),
-                  sortDescriptors: [],
-            animation: .default)
+    @FetchRequest(entity: Sunday.entity(), sortDescriptors: [], animation: .default)
     private var items7: FetchedResults<Sunday>
     @State var showingNotificationAlert = false
     @State var showingNotificationsClearedAlert = false
@@ -55,36 +41,36 @@ struct ContentView: View {
     @State var selectedTimeDetail = ""
     @State var showingAdd = false
     @State var day = 1
-    //Main View
     var body: some View {
         NavigationStack {
             List {
                 Section(header: Label("Monday", systemImage: "1.circle")) {
                     ForEach(items) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                            if selectedDay == 1 {
-                                selectedDayDetail = "Monday"
-                            } else if selectedDay == 2 {
-                                selectedDayDetail = "Tuesday"
-                            } else if selectedDay == 3 {
-                                selectedDayDetail = "Wednesday"
-                            } else if selectedDay == 4 {
-                                selectedDayDetail = "Thursday"
-                            } else if selectedDay == 5 {
-                                selectedDayDetail = "Friday"
-                            } else if selectedDay == 6 {
-                                selectedDayDetail = "Saturday"
-                            } else if selectedDay == 7 {
-                                selectedDayDetail = "Sunday"
-                            } else {
-                                selectedDayDetail = "Day Error"
+                        NavigationLink(destination: detail
+                            .onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                        }
                             .onDisappear() {
                                 self.titleTextDetail = ""
                                 self.locationTextDetail = ""
@@ -108,38 +94,39 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items[index])
-                            }
-                            PersistenceController.shared.save()
+                        for index in indexSet {
+                            managedObjectContext.delete(items[index])
                         }
+                        PersistenceController.shared.save()
+                    }
                 }
                 Section(header: Label("Tuesday", systemImage: "2.circle")) {
                     ForEach(items2) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                            if selectedDay == 1 {
-                                selectedDayDetail = "Monday"
-                            } else if selectedDay == 2 {
-                                selectedDayDetail = "Tuesday"
-                            } else if selectedDay == 3 {
-                                selectedDayDetail = "Wednesday"
-                            } else if selectedDay == 4 {
-                                selectedDayDetail = "Thursday"
-                            } else if selectedDay == 5 {
-                                selectedDayDetail = "Friday"
-                            } else if selectedDay == 6 {
-                                selectedDayDetail = "Saturday"
-                            } else if selectedDay == 7 {
-                                selectedDayDetail = "Sunday"
-                            } else {
-                                selectedDayDetail = "Day Error"
+                        NavigationLink(destination: detail
+                            .onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                        }
                             .onDisappear() {
                                 self.titleTextDetail = ""
                                 self.locationTextDetail = ""
@@ -163,38 +150,39 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items2[index])
-                            }
-                            PersistenceController.shared.save()
+                        for index in indexSet {
+                            managedObjectContext.delete(items2[index])
                         }
+                        PersistenceController.shared.save()
+                    }
                 }
                 Section(header: Label("Wednesday", systemImage: "3.circle")) {
                     ForEach(items3) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                            if selectedDay == 1 {
-                                selectedDayDetail = "Monday"
-                            } else if selectedDay == 2 {
-                                selectedDayDetail = "Tuesday"
-                            } else if selectedDay == 3 {
-                                selectedDayDetail = "Wednesday"
-                            } else if selectedDay == 4 {
-                                selectedDayDetail = "Thursday"
-                            } else if selectedDay == 5 {
-                                selectedDayDetail = "Friday"
-                            } else if selectedDay == 6 {
-                                selectedDayDetail = "Saturday"
-                            } else if selectedDay == 7 {
-                                selectedDayDetail = "Sunday"
-                            } else {
-                                selectedDayDetail = "Day Error"
+                        NavigationLink(destination: detail
+                            .onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                        }
                             .onDisappear() {
                                 self.titleTextDetail = ""
                                 self.locationTextDetail = ""
@@ -218,38 +206,39 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items3[index])
-                            }
-                            PersistenceController.shared.save()
+                        for index in indexSet {
+                            managedObjectContext.delete(items3[index])
                         }
+                        PersistenceController.shared.save()
+                    }
                 }
                 Section(header: Label("Thursday", systemImage: "4.circle")) {
                     ForEach(items4) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                            if selectedDay == 1 {
-                                selectedDayDetail = "Monday"
-                            } else if selectedDay == 2 {
-                                selectedDayDetail = "Tuesday"
-                            } else if selectedDay == 3 {
-                                selectedDayDetail = "Wednesday"
-                            } else if selectedDay == 4 {
-                                selectedDayDetail = "Thursday"
-                            } else if selectedDay == 5 {
-                                selectedDayDetail = "Friday"
-                            } else if selectedDay == 6 {
-                                selectedDayDetail = "Saturday"
-                            } else if selectedDay == 7 {
-                                selectedDayDetail = "Sunday"
-                            } else {
-                                selectedDayDetail = "Day Error"
+                        NavigationLink(destination: detail
+                            .onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                        }
                             .onDisappear() {
                                 self.titleTextDetail = ""
                                 self.locationTextDetail = ""
@@ -273,38 +262,39 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items4[index])
-                            }
-                            PersistenceController.shared.save()
+                        for index in indexSet {
+                            managedObjectContext.delete(items4[index])
                         }
+                        PersistenceController.shared.save()
+                    }
                 }
                 Section(header: Label("Friday", systemImage: "5.circle")) {
                     ForEach(items5) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                            if selectedDay == 1 {
-                                selectedDayDetail = "Monday"
-                            } else if selectedDay == 2 {
-                                selectedDayDetail = "Tuesday"
-                            } else if selectedDay == 3 {
-                                selectedDayDetail = "Wednesday"
-                            } else if selectedDay == 4 {
-                                selectedDayDetail = "Thursday"
-                            } else if selectedDay == 5 {
-                                selectedDayDetail = "Friday"
-                            } else if selectedDay == 6 {
-                                selectedDayDetail = "Saturday"
-                            } else if selectedDay == 7 {
-                                selectedDayDetail = "Sunday"
-                            } else {
-                                selectedDayDetail = "Day Error"
+                        NavigationLink(destination: detail
+                            .onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                        }
                             .onDisappear() {
                                 self.titleTextDetail = ""
                                 self.locationTextDetail = ""
@@ -328,38 +318,39 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items5[index])
-                            }
-                            PersistenceController.shared.save()
+                        for index in indexSet {
+                            managedObjectContext.delete(items5[index])
                         }
+                        PersistenceController.shared.save()
+                    }
                 }
                 Section(header: Label("Saturday", systemImage: "6.circle")) {
                     ForEach(items6) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                            if selectedDay == 1 {
-                                selectedDayDetail = "Monday"
-                            } else if selectedDay == 2 {
-                                selectedDayDetail = "Tuesday"
-                            } else if selectedDay == 3 {
-                                selectedDayDetail = "Wednesday"
-                            } else if selectedDay == 4 {
-                                selectedDayDetail = "Thursday"
-                            } else if selectedDay == 5 {
-                                selectedDayDetail = "Friday"
-                            } else if selectedDay == 6 {
-                                selectedDayDetail = "Saturday"
-                            } else if selectedDay == 7 {
-                                selectedDayDetail = "Sunday"
-                            } else {
-                                selectedDayDetail = "Day Error"
+                        NavigationLink(destination: detail
+                            .onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                        }
                             .onDisappear() {
                                 self.titleTextDetail = ""
                                 self.locationTextDetail = ""
@@ -383,38 +374,39 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items6[index])
-                            }
-                            PersistenceController.shared.save()
+                        for index in indexSet {
+                            managedObjectContext.delete(items6[index])
                         }
+                        PersistenceController.shared.save()
+                    }
                 }
                 Section(header: Label("Sunday", systemImage: "7.circle")) {
                     ForEach(items7) { item in
-                        NavigationLink(destination: detail.onAppear() {
-                            self.titleTextDetail = item.title ?? "Error"
-                            self.locationTextDetail = item.location ?? "Error"
-                            self.notesTextDetail = item.notes ?? "Error"
-                            self.selectedDay = Int(item.day)
-                            self.selectedTimeDetail = item.dueTime ?? "Error"
-                            if selectedDay == 1 {
-                                selectedDayDetail = "Monday"
-                            } else if selectedDay == 2 {
-                                selectedDayDetail = "Tuesday"
-                            } else if selectedDay == 3 {
-                                selectedDayDetail = "Wednesday"
-                            } else if selectedDay == 4 {
-                                selectedDayDetail = "Thursday"
-                            } else if selectedDay == 5 {
-                                selectedDayDetail = "Friday"
-                            } else if selectedDay == 6 {
-                                selectedDayDetail = "Saturday"
-                            } else if selectedDay == 7 {
-                                selectedDayDetail = "Sunday"
-                            } else {
-                                selectedDayDetail = "Day Error"
+                        NavigationLink(destination: detail
+                            .onAppear() {
+                                self.titleTextDetail = item.title ?? "Error"
+                                self.locationTextDetail = item.location ?? "Error"
+                                self.notesTextDetail = item.notes ?? "Error"
+                                self.selectedDay = Int(item.day)
+                                self.selectedTimeDetail = item.dueTime ?? "Error"
+                                if selectedDay == 1 {
+                                    selectedDayDetail = "Monday"
+                                } else if selectedDay == 2 {
+                                    selectedDayDetail = "Tuesday"
+                                } else if selectedDay == 3 {
+                                    selectedDayDetail = "Wednesday"
+                                } else if selectedDay == 4 {
+                                    selectedDayDetail = "Thursday"
+                                } else if selectedDay == 5 {
+                                    selectedDayDetail = "Friday"
+                                } else if selectedDay == 6 {
+                                    selectedDayDetail = "Saturday"
+                                } else if selectedDay == 7 {
+                                    selectedDayDetail = "Sunday"
+                                } else {
+                                    selectedDayDetail = "Day Error"
+                                }
                             }
-                        }
                             .onDisappear() {
                                 self.titleTextDetail = ""
                                 self.locationTextDetail = ""
@@ -438,11 +430,11 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { indexSet in
-                            for index in indexSet {
-                                managedObjectContext.delete(items7[index])
-                            }
-                            PersistenceController.shared.save()
+                        for index in indexSet {
+                            managedObjectContext.delete(items7[index])
                         }
+                        PersistenceController.shared.save()
+                    }
                 }
                 Button(action: {self.showingAdd = true}) {
                     Label("Add", systemImage: "plus")
@@ -458,7 +450,6 @@ struct ContentView: View {
             .navigationTitle("Timetable")
         }
     }
-    //Detail View
     var detail: some View {
         Form {
             Section(header: Label("Title", systemImage: "textformat")) {
@@ -500,7 +491,6 @@ struct ContentView: View {
         }
             .navigationTitle("\(titleTextDetail)")
     }
-    //Add View
     var add: some View {
         NavigationStack {
             Form {
@@ -653,19 +643,19 @@ struct ContentView: View {
             }
         }
     }
-    //Settings View
     var settings: some View {
         NavigationStack {
             Form {
                 Section(header: Label("Notifications", systemImage: "calendar")) {
-                    Button(action: {UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        if success {
-                            print("Authorised")
-                            self.showingNotificationAlert = true
-                        } else if let error = error {
-                            print(error.localizedDescription)
+                    Button(action: {
+                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                            if success {
+                             print("Authorised")
+                                self.showingNotificationAlert = true
+                            } else if let error = error {
+                                print(error.localizedDescription)
+                            }
                         }
-                    }
                         let dateF = Date()
                         let formatter = DateFormatter()
                         formatter.dateStyle = .full
@@ -727,7 +717,8 @@ struct ContentView: View {
                             Text("Done")
                         }
                     }
-                    Button(action: {UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                    Button(action: {
+                        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                         self.showingNotificationsClearedAlert = true
                     }) {
                         Text("Clear Scheduled Notifications")

@@ -14,6 +14,7 @@ struct ContentView: View {
     @State var showingAdd = false
     @State var showingSettings = false
     @State var showingNotificationAlert = false
+    @State var showingNotificationsClearedAlert = false
     @State var addDisabled = true
     @State var titleText = ""
     @State var titleTextDetail = ""
@@ -739,22 +740,22 @@ struct ContentView: View {
                         }
                         let content = UNMutableNotificationContent()
                         content.title = "Happening First Today"
-                        if selectedDay == 1 {
-                            content.subtitle = "Monday - \(items.first?.title ?? "None")"
-                        } else if selectedDay == 2 {
-                            content.subtitle = "Tuesday - \(items2.first?.title ?? "None")"
-                        } else if selectedDay == 3 {
-                            content.subtitle = "Wednesday - \(items3.first?.title ?? "None")"
-                        } else if selectedDay == 4 {
-                            content.subtitle = "Thursday - \(items4.first?.title ?? "None")"
-                        } else if selectedDay == 5 {
-                            content.subtitle = "Friday - \(items5.first?.title ?? "None")"
-                        } else if selectedDay == 6 {
-                            content.subtitle = "Saturday - \(items6.first?.title ?? "None")"
-                        } else if selectedDay == 7 {
-                            content.subtitle = "Sunday - \(items7.first?.title ?? "None")"
+                        if day == 1 {
+                            content.body = "Monday - \(items.first?.title ?? "None")"
+                        } else if day == 2 {
+                            content.body = "Tuesday - \(items2.first?.title ?? "None")"
+                        } else if day == 3 {
+                            content.body = "Wednesday - \(items3.first?.title ?? "None")"
+                        } else if day == 4 {
+                            content.body = "Thursday - \(items4.first?.title ?? "None")"
+                        } else if day == 5 {
+                            content.body = "Friday - \(items5.first?.title ?? "None")"
+                        } else if day == 6 {
+                            content.body = "Saturday - \(items6.first?.title ?? "None")"
+                        } else if day == 7 {
+                            content.body = "Sunday - \(items7.first?.title ?? "None")"
                         } else {
-                            content.subtitle = "Unrecognised Day"
+                            content.body = "Unrecognised Day"
                         }
                         content.sound = UNNotificationSound.default
                         var date = DateComponents()
@@ -771,7 +772,14 @@ struct ContentView: View {
                             Text("Done")
                         }
                     }
-                    Button(action: {UNUserNotificationCenter.current().removeAllPendingNotificationRequests()}) {
+                    .alert("Notifications Cleared", isPresented: $showingNotificationsClearedAlert) {
+                        Button(action: {self.showingNotificationsClearedAlert = true}) {
+                            Text("Done")
+                        }
+                    }
+                    Button(action: {UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                        self.showingNotificationsClearedAlert = true
+                    }) {
                         Text("Clear Scheduled Notifications")
                     }
                     #if !targetEnvironment(macCatalyst)

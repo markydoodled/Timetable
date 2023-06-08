@@ -158,47 +158,47 @@ struct Timetable_Widget_iOSEntryView : View {
             Text("Unused")
         case .accessoryRectangular:
             HStack {
-            VStack(alignment: .leading) {
-                if day == 1 {
-                    Label("Timetable", systemImage: "1.circle")
-                        .bold()
-                    Text("Today Is")
-                    Text("Monday")
-                } else if day == 2 {
-                    Label("Timetable", systemImage: "2.circle")
-                        .bold()
-                    Text("Today Is")
-                    Text("Tuesday")
-                } else if day == 3 {
-                    Label("Timetable", systemImage: "3.circle")
-                        .bold()
-                    Text("Today Is")
-                    Text("Wednesday")
-                } else if day == 4 {
-                    Label("Timetable", systemImage: "4.circle")
-                        .bold()
-                    Text("Today Is")
-                    Text("Thursday")
-                } else if day == 5 {
-                    Label("Timetable", systemImage: "5.circle")
-                        .bold()
-                    Text("Today Is")
-                    Text("Friday")
-                } else if day == 6 {
-                    Label("Timetable", systemImage: "6.circle")
-                        .bold()
-                    Text("Today Is")
-                    Text("Saturday")
-                } else if day == 7 {
-                    Label("Timetable", systemImage: "7.circle")
-                        .bold()
-                    Text("Today Is")
-                    Text("Sunday")
-                } else {
-                    Text("Error Day Select")
+                VStack(alignment: .leading) {
+                    if day == 1 {
+                        Label("Timetable", systemImage: "1.circle")
+                            .bold()
+                        Text("Today Is")
+                        Text("Monday")
+                    } else if day == 2 {
+                        Label("Timetable", systemImage: "2.circle")
+                            .bold()
+                        Text("Today Is")
+                        Text("Tuesday")
+                    } else if day == 3 {
+                        Label("Timetable", systemImage: "3.circle")
+                            .bold()
+                        Text("Today Is")
+                        Text("Wednesday")
+                    } else if day == 4 {
+                        Label("Timetable", systemImage: "4.circle")
+                            .bold()
+                        Text("Today Is")
+                        Text("Thursday")
+                    } else if day == 5 {
+                        Label("Timetable", systemImage: "5.circle")
+                            .bold()
+                        Text("Today Is")
+                        Text("Friday")
+                    } else if day == 6 {
+                        Label("Timetable", systemImage: "6.circle")
+                            .bold()
+                        Text("Today Is")
+                        Text("Saturday")
+                    } else if day == 7 {
+                        Label("Timetable", systemImage: "7.circle")
+                            .bold()
+                        Text("Today Is")
+                        Text("Sunday")
+                    } else {
+                        Text("Error Day Select")
+                    }
                 }
-            }
-            Spacer()
+                Spacer()
         }
             .onAppear() {
                 let date = Date()
@@ -241,7 +241,6 @@ struct Timetable_Widget_iOSEntryView : View {
 @main
 struct Timetable_Widget_iOS: Widget {
     let kind: String = "Timetable_Widget_iOS"
-
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Timetable_Widget_iOSEntryView(entry: entry)

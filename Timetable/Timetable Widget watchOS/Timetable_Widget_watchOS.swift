@@ -118,45 +118,45 @@ struct Timetable_Widget_watchOSEntryView : View {
             }
         case .accessoryCircular:
             VStack {
-            if day == 1 {
-                Text("Mon")
-                    .bold()
-                    .foregroundColor(.red)
-                Text("Tasks")
-            } else if day == 2 {
-                Text("Tue")
-                    .bold()
-                    .foregroundColor(.orange)
-                Text("Tasks")
-            } else if day == 3 {
-                Text("Wed")
-                    .bold()
-                    .foregroundColor(.yellow)
-                Text("Tasks")
-            } else if day == 4 {
-                Text("Thu")
-                    .bold()
-                    .foregroundColor(.green)
-                Text("Tasks")
-            } else if day == 5 {
-                Text("Fri")
-                    .bold()
-                    .foregroundColor(.cyan)
-                Text("Tasks")
-            } else if day == 6 {
-                Text("Sat")
-                    .bold()
-                    .foregroundColor(.pink)
-                Text("Tasks")
-            } else if day == 7 {
-                Text("Sun")
-                    .bold()
-                    .foregroundColor(.purple)
-                Text("Tasks")
-            } else {
-                Text("Error Day Select")
+                if day == 1 {
+                    Text("Mon")
+                        .bold()
+                        .foregroundColor(.red)
+                    Text("Tasks")
+                } else if day == 2 {
+                    Text("Tue")
+                        .bold()
+                        .foregroundColor(.orange)
+                    Text("Tasks")
+                } else if day == 3 {
+                    Text("Wed")
+                        .bold()
+                        .foregroundColor(.yellow)
+                    Text("Tasks")
+                } else if day == 4 {
+                    Text("Thu")
+                        .bold()
+                        .foregroundColor(.green)
+                    Text("Tasks")
+                } else if day == 5 {
+                    Text("Fri")
+                        .bold()
+                        .foregroundColor(.cyan)
+                    Text("Tasks")
+                } else if day == 6 {
+                    Text("Sat")
+                        .bold()
+                        .foregroundColor(.pink)
+                    Text("Tasks")
+                } else if day == 7 {
+                    Text("Sun")
+                        .bold()
+                        .foregroundColor(.purple)
+                    Text("Tasks")
+                } else {
+                    Text("Error Day Select")
+                }
             }
-        }
             .onAppear() {
                 let date = Date()
                 let formatter = DateFormatter()
@@ -183,53 +183,53 @@ struct Timetable_Widget_watchOSEntryView : View {
             }
         case .accessoryRectangular:
             HStack {
-            VStack(alignment: .leading) {
-                if day == 1 {
-                    Label("Timetable", systemImage: "1.circle")
-                        .bold()
-                        .foregroundColor(.red)
-                    Text("Today Is")
-                    Text("Monday")
-                } else if day == 2 {
-                    Label("Timetable", systemImage: "2.circle")
-                        .bold()
-                        .foregroundColor(.orange)
-                    Text("Today Is")
-                    Text("Tuesday")
-                } else if day == 3 {
-                    Label("Timetable", systemImage: "3.circle")
-                        .bold()
-                        .foregroundColor(.yellow)
-                    Text("Today Is")
-                    Text("Wednesday")
-                } else if day == 4 {
-                    Label("Timetable", systemImage: "4.circle")
-                        .bold()
-                        .foregroundColor(.green)
-                    Text("Today Is")
-                    Text("Thursday")
-                } else if day == 5 {
-                    Label("Timetable", systemImage: "5.circle")
-                        .bold()
-                        .foregroundColor(.cyan)
-                    Text("Today Is")
-                    Text("Friday")
-                } else if day == 6 {
-                    Label("Timetable", systemImage: "6.circle")
-                        .bold()
-                        .foregroundColor(.pink)
-                    Text("Today Is")
-                    Text("Saturday")
-                } else if day == 7 {
-                    Label("Timetable", systemImage: "7.circle")
-                        .bold()
-                        .foregroundColor(.purple)
-                    Text("Today Is")
-                    Text("Sunday")
-                } else {
-                    Text("Error Day Select")
+                VStack(alignment: .leading) {
+                    if day == 1 {
+                        Label("Timetable", systemImage: "1.circle")
+                            .bold()
+                            .foregroundColor(.red)
+                        Text("Today Is")
+                        Text("Monday")
+                    } else if day == 2 {
+                        Label("Timetable", systemImage: "2.circle")
+                            .bold()
+                            .foregroundColor(.orange)
+                        Text("Today Is")
+                        Text("Tuesday")
+                    } else if day == 3 {
+                        Label("Timetable", systemImage: "3.circle")
+                            .bold()
+                            .foregroundColor(.yellow)
+                        Text("Today Is")
+                        Text("Wednesday")
+                    } else if day == 4 {
+                        Label("Timetable", systemImage: "4.circle")
+                            .bold()
+                            .foregroundColor(.green)
+                        Text("Today Is")
+                        Text("Thursday")
+                    } else if day == 5 {
+                        Label("Timetable", systemImage: "5.circle")
+                            .bold()
+                            .foregroundColor(.cyan)
+                        Text("Today Is")
+                        Text("Friday")
+                    } else if day == 6 {
+                        Label("Timetable", systemImage: "6.circle")
+                            .bold()
+                            .foregroundColor(.pink)
+                        Text("Today Is")
+                        Text("Saturday")
+                    } else if day == 7 {
+                        Label("Timetable", systemImage: "7.circle")
+                            .bold()
+                            .foregroundColor(.purple)
+                        Text("Today Is")
+                        Text("Sunday")
+                    } else {
+                        Text("Error Day Select")
+                    }
                 }
-            }
                 Spacer()
         }
             .onAppear() {

@@ -9,9 +9,7 @@ import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
-    
     let container: NSPersistentContainer
-    
     static var preview: PersistenceController = {
         let controller = PersistenceController(inMemory: true)
         return controller
@@ -19,6 +17,7 @@ struct PersistenceController {
     
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "TaskModel")
+        
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
@@ -29,6 +28,7 @@ struct PersistenceController {
             }
         }
     }
+    
     func save() {
         let context = container.viewContext
         

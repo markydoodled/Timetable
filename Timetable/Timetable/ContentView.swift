@@ -11,6 +11,7 @@ import CoreData
 import MessageUI
 
 struct ContentView: View {
+    //Fetch Data From The Database
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Monday.entity(), sortDescriptors: [], animation: .default)
     private var items: FetchedResults<Monday>
@@ -26,6 +27,7 @@ struct ContentView: View {
     private var items6: FetchedResults<Saturday>
     @FetchRequest(entity: Sunday.entity(), sortDescriptors: [], animation: .default)
     private var items7: FetchedResults<Sunday>
+    //Add And Display Detail Variables
     @State var showingAdd = false
     @State var showingSettings = false
     @State var showingNotificationAlert = false
@@ -42,13 +44,17 @@ struct ContentView: View {
     @State var selectedTime = Date()
     @State var selectedTimeDetail = ""
     @State var day = 1
+    //Mail View Variables
     @State var result: Result<MFMailComposeResult, Error>? = nil
     @State var isShowingMailView = false
+    //Main View
     var body: some View {
         NavigationStack {
             List {
+                //Monday Task Section
                 Section(header: Label("Monday", systemImage: "1.circle")) {
                     ForEach(items) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -96,6 +102,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items[index])
@@ -103,8 +110,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Tuesday Task Section
                 Section(header: Label("Tuesday", systemImage: "2.circle")) {
                     ForEach(items2) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -152,6 +161,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                          for index in indexSet {
                             managedObjectContext.delete(items2[index])
@@ -159,8 +169,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Wednesday Task Section
                 Section(header: Label("Wednesday", systemImage: "3.circle")) {
                     ForEach(items3) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -208,6 +220,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items3[index])
@@ -215,8 +228,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Thursday Task Section
                 Section(header: Label("Thursday", systemImage: "4.circle")) {
                     ForEach(items4) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -264,6 +279,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items4[index])
@@ -271,8 +287,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Friday Task Section
                 Section(header: Label("Friday", systemImage: "5.circle")) {
                     ForEach(items5) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -320,6 +338,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items5[index])
@@ -327,8 +346,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Saturday Task Section
                 Section(header: Label("Saturday", systemImage: "6.circle")) {
                     ForEach(items6) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -376,6 +397,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items6[index])
@@ -383,8 +405,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Sunday Task Section
                 Section(header: Label("Sunday", systemImage: "7.circle")) {
                     ForEach(items7) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -432,6 +456,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items7[index])
@@ -445,6 +470,7 @@ struct ContentView: View {
             .navigationTitle("Timetable")
             #endif
             .toolbar {
+                //Button And Shortcut To Show The Settings View
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {self.showingSettings = true}) {
                         Image(systemName: "gearshape")
@@ -454,9 +480,11 @@ struct ContentView: View {
                         settings
                     }
                 }
+                //Drop The Task List Into Edit Mode
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
+                //Button And Shortcut To Show The Add View
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {self.showingAdd = true}) {
                         Image(systemName: "plus")
@@ -471,13 +499,16 @@ struct ContentView: View {
             }
         }
     }
+    //Task Detail View
     var detail: some View {
         Form {
+            //Display Title
             Section(header: Label("Title", systemImage: "textformat")) {
                 Text("\(titleTextDetail)")
                     .textSelection(.enabled)
                     .font(.title)
             }
+            //Display The Location
             if locationTextDetail != "" {
                 Section(header: Label("Location", systemImage: "location.fill")) {
                     Text("\(locationTextDetail)")
@@ -485,6 +516,7 @@ struct ContentView: View {
                         .font(.title)
                 }
             }
+            //Display The Day
             Section(header: Label("Day", systemImage: "calendar")) {
                 if selectedDay == 1 {
                     Text("Monday")
@@ -520,11 +552,13 @@ struct ContentView: View {
                         .font(.title)
                 }
             }
+            //Display The Time
             Section(header: Label("Time", systemImage: "calendar.badge.clock")) {
                 Text("\(selectedTimeDetail)")
                     .textSelection(.enabled)
                     .font(.title)
             }
+            //Display The Notes
             if notesTextDetail != "" {
                 Section(header: Label("Notes", systemImage: "note.text")) {
                     Text("\(notesTextDetail)")
@@ -535,18 +569,22 @@ struct ContentView: View {
         }
         .navigationTitle("\(titleTextDetail)")
         .toolbar {
+            //Share The Task Through The Share Sheet
             ToolbarItem(placement: .navigationBarTrailing) {
                 ShareLink(item: "\(titleTextDetail)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)\n\(notesTextDetail)")
             }
         }
     }
+    //Add Sheet View
     var add: some View {
         NavigationStack {
             Form {
                 Section {
+                    //Text Fields For Title And Location
                     TextField("Title", text: $titleText)
                     TextField("Location", text: $locationText)
                 }
+                //Select A Day
                 Section {
                     Picker("Day", selection: $selectedDay) {
                         Text("Monday")
@@ -564,9 +602,11 @@ struct ContentView: View {
                         Text("Sunday")
                             .tag(7)
                     }
+                    //Select A Time
                     DatePicker("Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
                         .datePickerStyle(.graphical)
                 }
+                //Notes Field
                 Section {
                     TextField("Notes", text: $notesText, axis: .vertical)
                         .lineLimit(5)
@@ -575,6 +615,7 @@ struct ContentView: View {
             .navigationTitle("Add")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                //Cancel The Add, Close The View And Reset The Variables
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         self.titleText = ""
@@ -587,6 +628,7 @@ struct ContentView: View {
                         Text("Cancel")
                     }
                 }
+                //Complete The Add, Dismiss The View And Write The Variable To The Database
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         if selectedDay == 1 {
@@ -682,6 +724,7 @@ struct ContentView: View {
                 }
             }
         }
+        //Monitor If Title Is Not Empty To Enable The Add Button
         .onChange(of: titleText) { newValue in
             if titleText != "" {
                 addDisabled = false
@@ -695,10 +738,12 @@ struct ContentView: View {
             }
         }
     }
+    //Settings Page View
     var settings: some View {
         NavigationStack {
             Form {
                 Section(header: Label("Notifications", systemImage: "calendar")) {
+                    //Register Notifications
                     Button(action: {
                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                             if success {
@@ -759,6 +804,7 @@ struct ContentView: View {
                     }) {
                         Text("Schedule Notifications")
                     }
+                    //Show Confirmation Alerts
                     .alert("Notifications Scheduled", isPresented: $showingNotificationAlert) {
                         Button(action: {self.showingNotificationAlert = false}) {
                             Text("Done")
@@ -769,18 +815,21 @@ struct ContentView: View {
                             Text("Done")
                         }
                     }
+                    //Clear Notifications
                     Button(action: {
                         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                         self.showingNotificationsClearedAlert = true
                     }) {
                         Text("Clear Scheduled Notifications")
                     }
+                    //Open iOS Settings App
                     #if !targetEnvironment(macCatalyst)
                     Button(action: {UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)}) {
                         Text("Open Settings")
                     }
                     #endif
                 }
+                //Version Information And Feedback Button
                 Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
                     LabeledContent("Version") {
                         Text("1.1")
@@ -798,6 +847,7 @@ struct ContentView: View {
             }
             .navigationTitle("Settings")
             .toolbar {
+                //Dismiss The View
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {self.showingSettings = false}) {
                         Text("Done")
@@ -808,35 +858,46 @@ struct ContentView: View {
     }
 }
 
+//Define A Struct Called MailView That Conforms To The UIViewControllerRepresentable Protocol
 struct MailView: UIViewControllerRepresentable {
+    //Define Two Bindings That Will Be Used To Control The Presentation Of The Mail Compose View Controller
     @Binding var isShowing: Bool
     @Binding var result: Result<MFMailComposeResult, Error>?
     
+    //Define A Coordinator Class That Will Be Used To Handle The Delegate Methods Of The Mail Compose View Controller
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+        //Define Two Bindings That Will Be Used To Control The Presentation Of The Mail Compose View Controller
         @Binding var isShowing: Bool
         @Binding var result: Result<MFMailComposeResult, Error>?
 
+        //Initialize The Coordinator With The Two Bindings
         init(isShowing: Binding<Bool>, result: Binding<Result<MFMailComposeResult, Error>?>) {
             _isShowing = isShowing
             _result = result
         }
 
+        //Implement The didFinishWith Delegate Method To Handle The Result Of The Mail Compose View Controller
         func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            //Dismiss The Mail Compose View Controller
             defer {
                 isShowing = false
             }
+            //If There Was An Error, Set The Result Binding To A Failure With The Error
             guard error == nil else {
                 self.result = .failure(error!)
                 return
             }
+            //Otherwise, Set The Result Binding To A Success With The Result
             self.result = .success(result)
         }
     }
 
+    //Implement The makeCoordinator Method To Create A New Coordinator Instance
     func makeCoordinator() -> Coordinator {
         return Coordinator(isShowing: $isShowing, result: $result)
     }
 
+    //Implement The makeUIViewController Method To Create A New MFMailComposeViewController Instance
     func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
         let vc = MFMailComposeViewController()
         vc.mailComposeDelegate = context.coordinator
@@ -846,11 +907,13 @@ struct MailView: UIViewControllerRepresentable {
         return vc
     }
 
+    //Implement The updateUIViewController Method To Do Nothing
     func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: UIViewControllerRepresentableContext<MailView>) {
         
     }
 }
 
+//Xcode Previews View
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

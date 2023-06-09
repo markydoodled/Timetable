@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 
+//Create A Timeline For Updating The Widget
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
@@ -33,6 +34,7 @@ struct Provider: TimelineProvider {
     }
 }
 
+//Create An Entry For The Timeline
 struct SimpleEntry: TimelineEntry {
     let date: Date
 }
@@ -51,6 +53,7 @@ struct Timetable_Widget_watchOSEntryView : View {
             Text("Unused")
         case .systemExtraLarge:
             Text("Unused")
+        //Corner Complication Widget
         case .accessoryCorner:
             VStack {
                 if day == 1 {
@@ -116,6 +119,7 @@ struct Timetable_Widget_watchOSEntryView : View {
                     day = 8
                 }
             }
+        //Graphic Circular Complication Widget
         case .accessoryCircular:
             VStack {
                 if day == 1 {
@@ -181,6 +185,7 @@ struct Timetable_Widget_watchOSEntryView : View {
                     day = 8
                 }
             }
+        //Rectangular Complication Widget
         case .accessoryRectangular:
             HStack {
                 VStack(alignment: .leading) {
@@ -256,6 +261,7 @@ struct Timetable_Widget_watchOSEntryView : View {
                     day = 8
                 }
             }
+        //Graphic Inline Complication Widget
         case .accessoryInline:
             ZStack {
                 if day == 1 {
@@ -317,6 +323,7 @@ struct Timetable_Widget_watchOSEntryView : View {
 struct Timetable_Widget_watchOS: Widget {
     let kind: String = "Timetable_Widget_watchOS"
     var body: some WidgetConfiguration {
+        //Add The Widget To The System
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Timetable_Widget_watchOSEntryView(entry: entry)
         }
@@ -326,6 +333,7 @@ struct Timetable_Widget_watchOS: Widget {
     }
 }
 
+//Xcode Widget Preview View
 struct Timetable_Widget_watchOS_Previews: PreviewProvider {
     static var previews: some View {
         Timetable_Widget_watchOSEntryView(entry: SimpleEntry(date: Date()))

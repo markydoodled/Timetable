@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 
+//Create A Timeline For Updating The Widget
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
@@ -33,6 +34,7 @@ struct Provider: TimelineProvider {
     }
 }
 
+//Create An Entry For The Timeline
 struct SimpleEntry: TimelineEntry {
     let date: Date
 }
@@ -43,6 +45,7 @@ struct Timetable_Widget_iOSEntryView : View {
     @State var day = 1
     var body: some View {
         switch family {
+        //Home Screen Small Widget
         case .systemSmall:
             ZStack {
                 if day == 1 {
@@ -156,6 +159,7 @@ struct Timetable_Widget_iOSEntryView : View {
             }
         case .accessoryInline:
             Text("Unused")
+        //Lock Screen Rectange Widget
         case .accessoryRectangular:
             HStack {
                 VStack(alignment: .leading) {
@@ -242,6 +246,7 @@ struct Timetable_Widget_iOSEntryView : View {
 struct Timetable_Widget_iOS: Widget {
     let kind: String = "Timetable_Widget_iOS"
     var body: some WidgetConfiguration {
+        //Add The Widget To The System
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Timetable_Widget_iOSEntryView(entry: entry)
         }
@@ -251,6 +256,7 @@ struct Timetable_Widget_iOS: Widget {
     }
 }
 
+//Xcode Widget Preview View
 struct Timetable_Widget_iOS_Previews: PreviewProvider {
     static var previews: some View {
         Timetable_Widget_iOSEntryView(entry: SimpleEntry(date: Date()))

@@ -11,6 +11,7 @@ import UserNotifications
 import WatchDatePicker
 
 struct ContentView: View {
+    //Fetch Data From The Database
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Monday.entity(), sortDescriptors: [], animation: .default)
     private var items: FetchedResults<Monday>
@@ -26,6 +27,7 @@ struct ContentView: View {
     private var items6: FetchedResults<Saturday>
     @FetchRequest(entity: Sunday.entity(), sortDescriptors: [], animation: .default)
     private var items7: FetchedResults<Sunday>
+    //Add And Display Detail Variables
     @State var showingNotificationAlert = false
     @State var showingNotificationsClearedAlert = false
     @State var addDisabled = true
@@ -44,8 +46,10 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
+                //Monday Task Section
                 Section(header: Label("Monday", systemImage: "1.circle")) {
                     ForEach(items) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -93,6 +97,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items[index])
@@ -100,8 +105,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Tuesday Task Section
                 Section(header: Label("Tuesday", systemImage: "2.circle")) {
                     ForEach(items2) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -149,6 +156,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items2[index])
@@ -156,8 +164,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Wednesday Task Section
                 Section(header: Label("Wednesday", systemImage: "3.circle")) {
                     ForEach(items3) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -205,6 +215,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items3[index])
@@ -212,8 +223,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Thursday Task Section
                 Section(header: Label("Thursday", systemImage: "4.circle")) {
                     ForEach(items4) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -261,6 +274,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items4[index])
@@ -268,8 +282,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Friday Task Section
                 Section(header: Label("Friday", systemImage: "5.circle")) {
                     ForEach(items5) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -317,6 +333,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items5[index])
@@ -324,8 +341,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Saturday Task Section
                 Section(header: Label("Saturday", systemImage: "6.circle")) {
                     ForEach(items6) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -373,6 +392,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items6[index])
@@ -380,8 +400,10 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Sunday Task Section
                 Section(header: Label("Sunday", systemImage: "7.circle")) {
                     ForEach(items7) { item in
+                        //Navigation Link That Loads Data Into The Detail View
                         NavigationLink(destination: detail
                             .onAppear() {
                                 self.titleTextDetail = item.title ?? "Error"
@@ -429,6 +451,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    //Delete Task From The Database
                     .onDelete { indexSet in
                         for index in indexSet {
                             managedObjectContext.delete(items7[index])
@@ -436,6 +459,7 @@ struct ContentView: View {
                         PersistenceController.shared.save()
                     }
                 }
+                //Button To Show The Add View
                 Button(action: {self.showingAdd = true}) {
                     Label("Add", systemImage: "plus")
                         .foregroundColor(.accentColor)
@@ -443,6 +467,7 @@ struct ContentView: View {
                 .sheet(isPresented: $showingAdd) {
                     add
                 }
+                //Button To Show The Settings View
                 NavigationLink(destination: settings) {
                     Label("Settings", systemImage: "gearshape")
                 }
@@ -450,16 +475,20 @@ struct ContentView: View {
             .navigationTitle("Timetable")
         }
     }
+    //Detail View
     var detail: some View {
         Form {
+            //Title Detail Text
             Section(header: Label("Title", systemImage: "textformat")) {
                 Text("\(titleTextDetail)")
             }
+            //Location Detail Text
             if locationTextDetail != "" {
                 Section(header: Label("Location", systemImage: "location.fill")) {
                     Text("\(locationTextDetail)")
                 }
             }
+            //Day Detail Text
             Section(header: Label("Day", systemImage: "calendar")) {
                 if selectedDay == 1 {
                     Text("Monday")
@@ -479,25 +508,31 @@ struct ContentView: View {
                     Text("Day Error")
                 }
             }
+            //Time Detail Text
             Section(header: Label("Time", systemImage: "calendar.badge.clock")) {
                 Text("\(selectedTimeDetail)")
             }
+            //Notes Detail Text
             if notesTextDetail != "" {
                 Section(header: Label("Notes", systemImage: "note.text")) {
                     Text("\(notesTextDetail)")
                 }
             }
+            //System Share Button To Share The Task
             ShareLink(item: "\(titleTextDetail)\n\(selectedDayDetail)\n\(selectedTimeDetail)\n\(locationTextDetail)\n\(notesTextDetail)")
         }
             .navigationTitle("\(titleTextDetail)")
     }
+    //Add View
     var add: some View {
         NavigationStack {
             Form {
+                //Text Fields To Add The Title And Location Text
                 Section {
                     TextField("Title", text: $titleText)
                     TextField("Location", text: $locationText)
                 }
+                //Picker To Pick The Task Day
                 Section {
                     Picker("Day", selection: $selectedDay) {
                         Text("Monday")
@@ -515,14 +550,17 @@ struct ContentView: View {
                         Text("Sunday")
                             .tag(7)
                     }
+                    //Time Picker To Select The Task Time
                     DatePicker("Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
                 }
+                //Notes Text Field
                 Section {
                     TextField("Notes", text: $notesText, axis: .vertical)
                         .lineLimit(5)
                 }
             }
             .toolbar {
+                //Button To Dismiss And Reset The Add View
                 ToolbarItem(placement: .cancellationAction) {
                     Button(action: {
                         self.titleText = ""
@@ -535,6 +573,7 @@ struct ContentView: View {
                         Text("Cancel")
                     }
                 }
+                //Button To Dismiss The Add View, Write To The Database And Reset The Variables
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: {
                         if selectedDay == 1 {
@@ -629,6 +668,7 @@ struct ContentView: View {
                     .disabled(addDisabled)
                 }
             }
+            //Check For Title Text Field Being Blank And Disable Done Button If It Is
             .onChange(of: titleText) { newValue in
                 if titleText != "" {
                     addDisabled = false
@@ -643,10 +683,12 @@ struct ContentView: View {
             }
         }
     }
+    //Settings View
     var settings: some View {
         NavigationStack {
             Form {
                 Section(header: Label("Notifications", systemImage: "calendar")) {
+                    //Button To Schedule App Notifications
                     Button(action: {
                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                             if success {
@@ -707,6 +749,7 @@ struct ContentView: View {
                     }) {
                         Text("Schedule Notifications")
                     }
+                    //Confirmation Alerts
                     .alert("Notifications Scheduled", isPresented: $showingNotificationAlert) {
                         Button(action: {self.showingNotificationAlert = false}) {
                             Text("Done")
@@ -717,6 +760,7 @@ struct ContentView: View {
                             Text("Done")
                         }
                     }
+                    //Button To Clear The Scheduled Notifications
                     Button(action: {
                         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                         self.showingNotificationsClearedAlert = true
@@ -724,6 +768,7 @@ struct ContentView: View {
                         Text("Clear Scheduled Notifications")
                     }
                 }
+                //Version Information
                 Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
                     LabeledContent("Version") {
                         Text("1.1")
@@ -738,6 +783,7 @@ struct ContentView: View {
     }
 }
 
+//Xcode Previews View
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

@@ -42,7 +42,6 @@ struct ContentView: View {
     @State var selectedTime = Date()
     @State var selectedTimeDetail = ""
     @State var showingAdd = false
-    @State var day = 1
     var body: some View {
         NavigationStack {
             List {
@@ -698,54 +697,83 @@ struct ContentView: View {
                                 print(error.localizedDescription)
                             }
                         }
-                        let dateF = Date()
-                        let formatter = DateFormatter()
-                        formatter.dateStyle = .full
-                        formatter.dateFormat = "EEEE"
-                        let dateOut = formatter.string(from: dateF)
-                        if dateOut == "Monday" {
-                            day = 1
-                        } else if dateOut == "Tuesday" {
-                            day = 2
-                        } else if dateOut == "Wednesday" {
-                            day = 3
-                        } else if dateOut == "Thursday" {
-                            day = 4
-                        } else if dateOut == "Friday" {
-                            day = 5
-                        } else if dateOut == "Saturday" {
-                            day = 6
-                        } else if dateOut == "Sunday" {
-                            day = 7
-                        } else {
-                            day = 8
-                        }
                         let content = UNMutableNotificationContent()
+                        let content2 = UNMutableNotificationContent()
+                        let content3 = UNMutableNotificationContent()
+                        let content4 = UNMutableNotificationContent()
+                        let content5 = UNMutableNotificationContent()
+                        let content6 = UNMutableNotificationContent()
+                        let content7 = UNMutableNotificationContent()
                         content.title = "Happening First Today"
-                        if day == 1 {
-                            content.body = "Monday - \(items.first?.title ?? "None")"
-                        } else if day == 2 {
-                            content.body = "Tuesday - \(items2.first?.title ?? "None")"
-                        } else if day == 3 {
-                            content.body = "Wednesday - \(items3.first?.title ?? "None")"
-                        } else if day == 4 {
-                            content.body = "Thursday - \(items4.first?.title ?? "None")"
-                        } else if day == 5 {
-                            content.body = "Friday - \(items5.first?.title ?? "None")"
-                        } else if day == 6 {
-                            content.body = "Saturday - \(items6.first?.title ?? "None")"
-                        } else if day == 7 {
-                            content.body = "Sunday - \(items7.first?.title ?? "None")"
-                        } else {
-                            content.body = "Not A Weekday Today"
-                        }
+                        content2.title = "Happening First Today"
+                        content3.title = "Happening First Today"
+                        content4.title = "Happening First Today"
+                        content5.title = "Happening First Today"
+                        content6.title = "Happening First Today"
+                        content7.title = "Happening First Today"
+                        content.body = "Monday - \(items.first?.title ?? "None")"
+                        content2.body = "Tuesday - \(items2.first?.title ?? "None")"
+                        content3.body = "Wednesday - \(items3.first?.title ?? "None")"
+                        content4.body = "Thursday - \(items4.first?.title ?? "None")"
+                        content5.body = "Friday - \(items5.first?.title ?? "None")"
+                        content6.body = "Saturday - \(items6.first?.title ?? "None")"
+                        content7.body = "Sunday - \(items7.first?.title ?? "None")"
                         content.sound = UNNotificationSound.default
+                        content2.sound = UNNotificationSound.default
+                        content3.sound = UNNotificationSound.default
+                        content4.sound = UNNotificationSound.default
+                        content5.sound = UNNotificationSound.default
+                        content6.sound = UNNotificationSound.default
+                        content7.sound = UNNotificationSound.default
                         var date = DateComponents()
                         date.hour = 9
                         date.minute = 0
+                        date.weekday = 2
+                        var date2 = DateComponents()
+                        date2.hour = 9
+                        date2.minute = 0
+                        date2.weekday = 3
+                        var date3 = DateComponents()
+                        date3.hour = 9
+                        date3.minute = 0
+                        date3.weekday = 4
+                        var date4 = DateComponents()
+                        date4.hour = 9
+                        date4.minute = 0
+                        date4.weekday = 5
+                        var date5 = DateComponents()
+                        date5.hour = 9
+                        date5.minute = 0
+                        date5.weekday = 6
+                        var date6 = DateComponents()
+                        date6.hour = 9
+                        date6.minute = 0
+                        date6.weekday = 7
+                        var date7 = DateComponents()
+                        date7.hour = 9
+                        date7.minute = 0
+                        date7.weekday = 1
                         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+                        let trigger2 = UNCalendarNotificationTrigger(dateMatching: date2, repeats: true)
+                        let trigger3 = UNCalendarNotificationTrigger(dateMatching: date3, repeats: true)
+                        let trigger4 = UNCalendarNotificationTrigger(dateMatching: date4, repeats: true)
+                        let trigger5 = UNCalendarNotificationTrigger(dateMatching: date5, repeats: true)
+                        let trigger6 = UNCalendarNotificationTrigger(dateMatching: date6, repeats: true)
+                        let trigger7 = UNCalendarNotificationTrigger(dateMatching: date7, repeats: true)
                         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        let request2 = UNNotificationRequest(identifier: UUID().uuidString, content: content2, trigger: trigger2)
+                        let request3 = UNNotificationRequest(identifier: UUID().uuidString, content: content3, trigger: trigger3)
+                        let request4 = UNNotificationRequest(identifier: UUID().uuidString, content: content4, trigger: trigger4)
+                        let request5 = UNNotificationRequest(identifier: UUID().uuidString, content: content5, trigger: trigger5)
+                        let request6 = UNNotificationRequest(identifier: UUID().uuidString, content: content6, trigger: trigger6)
+                        let request7 = UNNotificationRequest(identifier: UUID().uuidString, content: content7, trigger: trigger7)
                         UNUserNotificationCenter.current().add(request)
+                        UNUserNotificationCenter.current().add(request2)
+                        UNUserNotificationCenter.current().add(request3)
+                        UNUserNotificationCenter.current().add(request4)
+                        UNUserNotificationCenter.current().add(request5)
+                        UNUserNotificationCenter.current().add(request6)
+                        UNUserNotificationCenter.current().add(request7)
                     }) {
                         Text("Schedule Notifications")
                     }
